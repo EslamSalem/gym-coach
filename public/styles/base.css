@@ -54,6 +54,7 @@ header nav a:active {
   color: var(--secondary-color);
   padding: 0.5rem 1rem;
   border-radius: 4px;
+  transition: background-color 0.5s;
 }
 
 .btn:hover,
@@ -71,4 +72,9 @@ header nav a:active {
 .btn-alt:hover,
 .btn-alt:active {
   background-color: var(--secondary-color);
+}
+
+footer {
+  text-align: center;
+  background-image: var(--gray-gradient);
 }
