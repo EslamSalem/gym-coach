@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/styles/base.css" />
-    <link rel="stylesheet" href="/styles/home.css" />
+  <%- include("includes/head", {title: "Welcome to Gym Coach"}) %>
+  <link rel="stylesheet" href="/styles/home.css" />
   </head>
   <body>
-    <header>
-      <a href="/" id="page-logo">Gym Coach</a>
-      <nav>
-        <a href="">Link 1</a>
-        <a href="">Link 2</a>
-        <a href="">Link 3</a>
-      </nav>
-    </header>
+    <%- include("includes/header") %>
     <main>
       <section id="welcome">
         <article class="sign">
@@ -98,16 +79,6 @@
         </div>
       </section>
     </main>
-    <footer>
-      <a href="https://instagram.com" target="_blank"
-        ><img src="/images/instagram-icon.png" alt="Instagram Icon"
-      /></a>
-      <a href="https://facebook.com" target="_blank"
-        ><img src="/images/facebook-icon.png" alt="Facebook Icon"
-      /></a>
-      <a href="https://tiktok.com" target="_blank"
-        ><img src="/images/tiktok-icon.png" alt="Tik Tok Icon"
-      /></a>
-    </footer>
+    <%- include("includes/footer") %>
   </body>
 </html>
