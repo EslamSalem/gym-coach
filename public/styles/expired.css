@@ -1,0 +1,24 @@
+section {
+  width: 90%;
+  max-width: 40rem;
+  margin: auto;
+}
+
+h2 {
+  color: var(--primary-color-medium);
+  margin: 2rem 0;
+}
+
+div {
+  margin-bottom: 4rem;
+}
+
+p {
+  font-size: 1.5rem;
+}
+
+main a {
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
