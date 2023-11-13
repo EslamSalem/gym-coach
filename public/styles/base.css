@@ -1,17 +1,27 @@
 html {
+  overflow: auto;
+  
   --gray-light: rgb(210, 210, 210);
   --gray-medium: rgb(128, 128, 128);
   --gray-dark: rgb(56, 56, 56);
   --gray-gradient-bottom: linear-gradient(to bottom, white, grey);
   --gray-gradient-top: linear-gradient(to top, white, grey);
-  --primary-color-dark: rgb(46, 99, 46);
+  --primary-color-dark: rgb(21, 44, 21);
+  --primary-color-medium: rgb(46, 99, 46);
   --primary-color-light: rgb(32, 126, 32);
-  --secondary-color: rgb(255, 255, 255);  
+  --secondary-color: rgb(255, 255, 255);
 }
 
 body {
   font-family: 'Oswald', sans-serif;
-  background-color: var(--gray-dark);
+  background-image: var(--gray-gradient-bottom);
+  margin: 0;
+}
+
+h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
   margin: 0;
 }
 
@@ -23,7 +33,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-medium);
 }
 
 a {
@@ -68,7 +78,7 @@ header nav a:active {
 }
 
 .offcanvas .page-logo {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-medium);
   text-shadow: none;
 }
 
@@ -79,40 +89,46 @@ header nav a:active {
 
 .offcanvas nav a {
   color: var(--secondary-color);
-  background-color: var(--primary-color-dark);
+  background-color: var(--primary-color-medium);
   border-radius: 4px;
   margin: 0.5rem 0;
   padding: 1rem;
 }
 
-.btn {
-  background-color: var(--primary-color-dark);
+.offcanvas nav a:active {
+  color: var(--secondary-color);
+  background-color: var(--primary-color-light);
+}
+
+.btn-main {
+  background-color: var(--primary-color-medium);
   color: var(--secondary-color);
   padding: 0.5rem 1rem;
+  border: 0;
   border-radius: 4px;
   transition: background-color 0.5s;
 }
 
-.btn:hover,
-.btn:active {
+.btn-main:hover,
+.btn-main:active {
   background-color: var(--primary-color-light);
 }
 
 .btn-alt {
-  background-color: var(--gray-light);
-  color: var(--primary-color-dark);
-  outline: 2px solid var(--primary-color-dark);
+  background-color: var(--secondary-color);
+  color: var(--primary-color-medium);
+  outline: 2px solid var(--primary-color-medium);
   outline-offset: -2px;
 }
 
 .btn-alt:hover,
 .btn-alt:active {
-  background-color: var(--secondary-color);
+  background-color: var(--gray-light);
 }
 
 footer {
   text-align: center;
-  background-image: var(--gray-gradient-bottom);
+  background-color: var(--primary-color-dark);
 }
 
 footer img {

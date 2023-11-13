@@ -22,12 +22,6 @@ main section {
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
-  font-size: 3rem;
-  text-align: center;
-  margin: 0;
-}
-
 #welcome h2 {
   margin-bottom: 2rem;
 }
@@ -38,7 +32,7 @@ h2 {
 
 #offers h2 {
   margin-bottom: 2rem;
-  color: var(--primary-color-dark);
+  color: var(--primary-color-medium);
 }
 
 #offers-cards {
@@ -66,7 +60,7 @@ h2 {
 }
 
 #message h2 {
-  color: var(--primary-color-dark);
+  color: var(--primary-color-medium);
   text-align: center;
   width: auto;
   padding: 2rem;
