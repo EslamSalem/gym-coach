@@ -1,0 +1,61 @@
+#plans {
+  width: 90%;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.plan-container:nth-of-type(1) {
+  grid-column: 1 / span 2;
+}
+
+.plan-container:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.accordion {
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+}
+
+.accordion-button {
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--secondary-color);
+  background-color: var(--primary-color-medium);
+}
+
+#diet-details {
+  border-radius: 6px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: var(--secondary-color);
+  margin: 0;
+  padding: 1rem;
+}
+
+#diet-details h3 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 48rem) {
+  #plans {
+    grid-template-columns: 1fr;
+  }
+}

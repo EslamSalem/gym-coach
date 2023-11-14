@@ -24,6 +24,7 @@ main section {
 
 #welcome h2 {
   margin-bottom: 2rem;
+  color: var(--secondary-color);
 }
 
 #offers {

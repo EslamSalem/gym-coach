@@ -1,0 +1,35 @@
+<%- include("../includes/head", {title: "My Program"}) %>
+<link rel="stylesheet" href="/styles/program.css" />
+</head>
+<body>
+  <%- include("../includes/header") %>
+  <main>
+    <section id="plans">
+      <div class="plan-container">
+        <h2>Weekly Routine</h2>
+        <%- include("includes/accordion") %>
+      </div>
+      <div class="plan-container">
+        <h2>Diet</h2>
+        <div id="diet-details">
+          <h3>Plan Title</h3>
+          <ul>
+            <li>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+              recusandae velit deserunt quasi magni dolores.
+            </li>
+            <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
+              repudiandae quod explicabo. Blanditiis tempore explicabo
+            </li>
+            <li>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+              recusandae velit deserunt quasi magni dolores.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <%- include("../includes/footer") %>
+</body>
+</html>
