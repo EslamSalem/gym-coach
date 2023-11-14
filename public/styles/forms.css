@@ -6,7 +6,7 @@ h2 {
 form {
   width: 90%;
   max-width: 30rem;
-  margin: auto;
+  margin: 2rem auto;
   padding: 0 1rem 1rem 1rem;
   overflow: auto;
   border-radius: 6px;
