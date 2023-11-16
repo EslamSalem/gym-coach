@@ -20,6 +20,26 @@ body {
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--gray-medium);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gray-dark);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--gray-dark);
+}
+
 main {
   padding-top: 5rem;
   min-height: calc(100vh - 4.5rem);
@@ -138,6 +158,20 @@ header nav a:active {
 .btn-alt:hover,
 .btn-alt:active {
   background-color: var(--gray-light);
+}
+
+.btn-alt:focus:not(:focus-visible) {
+  outline: 2px solid var(--primary-color-medium);
+  outline-offset: -2px;
+}
+
+.remove-btn {
+  background-color: var(--red-dark);
+}
+
+.remove-btn:hover,
+.remove-btn.active {
+  background-color: var(--red-light);
 }
 
 footer {

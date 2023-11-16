@@ -101,15 +101,6 @@ select.log-title {
   text-wrap: nowrap;
 }
 
-.remove-btn {
-  background-color: var(--red-dark);
-}
-
-.remove-btn:hover,
-.remove-btn.active {
-  background-color: var(--red-light);
-}
-
 @media (max-width: 57.5rem) {
   .user-item {
     flex-direction: column;
