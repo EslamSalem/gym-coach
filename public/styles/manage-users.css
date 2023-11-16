@@ -1,0 +1,118 @@
+#search-bar {
+  width: 90%;
+  max-width: 20rem;
+  margin: auto;
+  text-align: center;
+}
+
+#search-bar input {
+  width: 100%;
+  padding: 0.25rem;
+  border: 1px solid var(--primary-color-medium);
+  border-radius: 4px;
+}
+
+#search-bar input:focus {
+  outline: 2px solid var(--primary-color-medium);
+}
+
+#users-list {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  margin: 2rem auto;
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  border-radius: 6px;
+  box-shadow: var(--box-shadow-basic);
+}
+
+.user-details {
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.user-details h3 {
+  font-weight: bold;
+}
+
+.user-workouts {
+  flex: 0.5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 1rem;
+}
+
+.user-diet {
+  flex: 0.2;
+}
+
+.user-diet .log-group{
+  margin: auto;
+}
+
+.user-access {
+  flex: 0.1;
+  margin: 0 0.5rem;
+}
+
+.user-access .log-group,
+.user-diet .log-group {
+  width: fit-content;
+}
+
+.log-group {
+  border-radius: 6px;
+  border: 2px solid black;
+  display: flex;
+  overflow: hidden;
+  box-shadow: var(--box-shadow-basic);
+}
+
+.log-title {
+  background-color: var(--secondary-color);
+  padding: 6px 12px;
+  margin: 0;
+  border-right: 2px solid black;
+  outline: none;
+  text-wrap: nowrap;
+}
+
+select.log-title {
+  padding: 0;
+}
+
+.log-btn {
+  padding: 6px 12px;
+  border-radius: 0;
+  text-wrap: nowrap;
+}
+
+.remove-btn {
+  background-color: var(--red-dark);
+}
+
+.remove-btn:hover,
+.remove-btn.active {
+  background-color: var(--red-light);
+}
+
+@media (max-width: 57.5rem) {
+  .user-item {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

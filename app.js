@@ -3,6 +3,7 @@ const path = require("path");
 
 const baseRoutes = require("./routes/base.routes");
 const programRoutes = require("./routes/program.routes");
+const adminRoutes = require("./routes/admin.routes");
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(baseRoutes);
 app.use("/program", programRoutes);
+app.use("/admin", adminRoutes);
 
 app.listen(3000);

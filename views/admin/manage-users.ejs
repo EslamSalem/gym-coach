@@ -1,0 +1,103 @@
+<%- include("../includes/head", {title: "Manage Users"}) %>
+<link rel="stylesheet" href="/styles/manage-users.css">
+</head>
+<body>
+  <%- include("../includes/header") %>
+  <main>
+    <section>
+      <h2 class="page-heading">Manage Users</h2>
+      <div id="search-bar">
+        <input type="text" placeholder="Search Users">
+      </div>
+      <ul id="users-list">
+        <li class="user-item">
+          <div class="user-details">
+            <h3>[User Name]</h3>
+            <h3><a href="mailto:[User Email]">[User Email]</a></h3>
+            <h3>[Expiry Date] <!-- Subscription Date + 1 Month --></h3>
+          </div>
+          <div class="user-workouts">
+            <!--Loop Over Logs-->
+
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            <div class="log-group">
+              <p class="log-title">[Log Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+            
+            
+            <!--End loop-->
+
+            <form>
+              <div class="log-group">
+                <select class="log-title" name="log-select" id="log-select">
+                  <option value="null" selected>Add Workout</option>
+                  <!--Loop Over Logs-->
+                  <option value="[Lod ID]">[Log Title]</option>
+                  <option value="[Lod ID]">[Log Title]</option>
+                  <option value="[Lod ID]">[Log Title]</option>
+                </select>
+                <button type="button" class="btn-main log-btn">+</button>
+              </div>
+            </form>
+          </div>
+          <div class="user-diet">
+            <!--Nutrition plan dropdown-->
+            <div class="log-group">
+              <p class="log-title">[Nutrition Title]</p>
+              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            </div>
+
+            <form>
+              <div class="log-group">
+                <select class="log-title" name="nutrition-select" id="nutrition-select">
+                  <option value="null" selected>Choose Diet Plan</option>
+                  <!--Loop Over Logs-->
+                  <option value="[Nutrition ID]">[Nutrition Title]</option>
+                  <option value="[Nutrition ID]">[Nutrition Title]</option>
+                  <option value="[Nutrition ID]">[Nutrition Title]</option>
+                </select>
+                <button type="button" class="btn-main log-btn">+</button>
+              </div>
+            </form>
+          </div>
+          <div class="user-access">
+            <!--Giver or remove access-->
+            <form>
+              <div class="log-group">
+                <button type="button" class="btn-main log-btn">Grant Access</button>
+              </div>
+            </form>
+          </div>
+        </li>
+        <li class="user-item"></li>
+        <li class="user-item"></li>
+      </ul>
+    </section>
+  </main>
+  <%- include("../includes/footer") %>
+</body>
+</html>

@@ -1,6 +1,6 @@
 #plans {
   width: 90%;
-  margin: 2rem auto;
+  margin: 0 auto 2rem auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
@@ -17,7 +17,7 @@
 }
 
 .accordion {
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow-basic);
   border-radius: 6px;
 }
 
@@ -38,7 +38,7 @@
 
 #diet-details {
   border-radius: 6px;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--box-shadow-basic);
   background-color: var(--secondary-color);
   margin: 0;
   padding: 1rem;
@@ -48,10 +48,6 @@
   text-align: center;
   font-weight: bold;
   font-size: 1.5rem;
-}
-
-h2 {
-  margin-bottom: 2rem;
 }
 
 @media (max-width: 48rem) {

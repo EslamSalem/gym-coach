@@ -4,11 +4,6 @@ section {
   margin: auto;
 }
 
-h2 {
-  color: var(--primary-color-medium);
-  margin: 2rem 0;
-}
-
 div {
   margin-bottom: 4rem;
 }
