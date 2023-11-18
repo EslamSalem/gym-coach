@@ -1,0 +1,36 @@
+<%- include("../includes/head", {title: "Update Nutrition Plan"}) %>
+<link rel="stylesheet" href="/styles/forms.css" />
+<link rel="stylesheet" href="/styles/update-forms.css" />
+</head>
+<body>
+  <%- include("../includes/header") %>
+  <main>
+    <h2 class="page-heading">Update Nutrition Plan</h2>
+    <form>
+      <input
+        type="text"
+        name="nutrition-title"
+        id="nutrition-title"
+        placeholder="Nutrition Title..."
+        required
+      />
+      <!--Loop Through Meals-->
+      <div class="meals-list">
+        <textarea
+          name="meal-description"
+          id="meal-description"
+          rows="1"
+          placeholder="Meal Description..."
+          required
+        ></textarea>
+      </div>
+      <!--End Loop-->
+      <button type="button" class="btn-main" id="add-fields-btn">Add Meal</button>
+      <div id="form-control-btns">
+        <button class="btn-main btn-alt">Save</button>
+      </div>
+    </form>
+  </main>
+  <%- include("../includes/footer") %>
+</body>
+</html>

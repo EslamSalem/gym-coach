@@ -93,6 +93,8 @@
 
 select.log-title {
   padding: 0;
+  border: none;
+  border-right: 2px solid black;
 }
 
 .log-btn {

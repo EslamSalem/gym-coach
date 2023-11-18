@@ -1,0 +1,28 @@
+form {
+  text-align: center;
+}
+
+input,
+select,
+textarea {
+  margin-top: 1rem;
+}
+
+.workout-details {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.workout-details input {
+  width: 4rem;
+}
+
+.workout-details select {
+  width: auto;
+}
+
+#add-fields-btn {
+  margin-top: 1rem;
+}

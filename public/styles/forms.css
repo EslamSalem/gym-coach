@@ -16,14 +16,20 @@ label {
   font-weight: bold;
 }
 
-input {
+input,
+select,
+textarea {
+  display: block;
   width: 100%;
   padding: 0.25rem;
   border: 1px solid var(--primary-color-medium);
   border-radius: 4px;
+  resize: vertical;
 }
 
-input:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: 2px solid var(--primary-color-medium);
 }
 

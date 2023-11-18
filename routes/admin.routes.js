@@ -14,4 +14,12 @@ router.get("/nutrition", function(req, res) {  // /admin/nutrition
   res.render("admin/manage-nutrition");
 });
 
+router.get("/logs/update", function(req, res) {  // /admin/logs/update
+  res.render("admin/update-logs");
+});
+
+router.get("/nutrition/update", function(req, res) {  // /admin/nutrition/update
+  res.render("admin/update-nutrition");
+});
+
 module.exports = router;

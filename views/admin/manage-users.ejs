@@ -50,16 +50,16 @@
             
             <!--End loop-->
 
-            <div class="log-group">
-              <select class="log-title" name="log-select" id="log-select">
-                <option value="null" selected>Add Workout</option>
+            <form class="log-group">
+              <select class="log-title" name="log-select" id="log-select" required>
+                <option value="" disabled selected>Add Workout</option>
                 <!--Loop Over Logs-->
                 <option value="[Lod ID]">[Log Title]</option>
                 <option value="[Lod ID]">[Log Title]</option>
                 <option value="[Lod ID]">[Log Title]</option>
               </select>
-              <button type="button" class="btn-main log-btn">+</button>
-            </div>
+              <button class="btn-main log-btn">+</button>
+            </form>
           </div>
           <div class="user-diet">
             <!--Nutrition plan dropdown-->
@@ -67,16 +67,16 @@
               <p class="log-title">[Nutrition Title]</p>
               <button type="button" class="btn-main log-btn remove-btn">-</button>
             </div>
-            <div class="log-group">
-              <select class="log-title" name="nutrition-select" id="nutrition-select">
-                <option value="null" selected>Choose Diet Plan</option>
+            <form class="log-group">
+              <select class="log-title" name="nutrition-select" id="nutrition-select" required>
+                <option value="" disabled selected>Choose Diet Plan</option>
                 <!--Loop Over Logs-->
                 <option value="[Nutrition ID]">[Nutrition Title]</option>
                 <option value="[Nutrition ID]">[Nutrition Title]</option>
                 <option value="[Nutrition ID]">[Nutrition Title]</option>
               </select>
-              <button type="button" class="btn-main log-btn">+</button>
-            </div>
+              <button class="btn-main log-btn">+</button>
+            </form>
           </div>
           <div class="user-access">
             <!--Giver or remove access-->
