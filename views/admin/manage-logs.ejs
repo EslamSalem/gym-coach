@@ -5,6 +5,7 @@
   <%- include("../includes/header") %>
   <main>
     <h2 class="page-heading">Manage Workout Logs</h2>
+    <a href="/admin/logs/workouts" class="btn-main">Workouts Collection</a>
     <section id="plans-grid">
       <!--Loop Over Logs-->
       <div class="plan-container">
@@ -71,10 +72,12 @@
       <!--End Loop-->
 
       <div id="add-plan" class="plan-container">
-        <input type="text" name="log-title" placeholder="Log Title..." required>
-        <div class="form-control-btns">
-          <button class="btn-main">Add Workout Log</button>
-        </div>
+        <form>
+          <input type="text" name="log-title" placeholder="Log Name..." required>
+          <div class="form-control-btns">
+            <button class="btn-main">Add Workout Log</button>
+          </div>
+        </form>
       </div>
       
 

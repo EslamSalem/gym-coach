@@ -10,6 +10,10 @@ router.get("/logs", function(req, res) {  // /admin/logs
   res.render("admin/manage-logs");
 });
 
+router.get("/logs/workouts", function(req, res) {  //  /admin/logs/workouts
+  res.render("admin/workouts-collection");
+});
+
 router.get("/nutrition", function(req, res) {  // /admin/nutrition
   res.render("admin/manage-nutrition");
 });

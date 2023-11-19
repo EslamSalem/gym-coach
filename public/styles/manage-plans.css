@@ -1,6 +1,12 @@
+main a {
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
+
 #plans-grid {
   width: 90%;
-  margin: 0 auto 2rem auto;
+  margin: 2rem auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -29,13 +35,23 @@
   margin: 1rem 0 0 0;
 }
 
-#add-plan input {
+input {
   width: 100%;
   padding: 0.25rem;
   border: 1px solid var(--primary-color-medium);
   border-radius: 4px;
 }
 
-#add-plan input:focus {
+input:focus {
   outline: 2px solid var(--primary-color-medium);
+}
+
+.edit-workout-name {
+  border: 2px solid var(--primary-color-medium);
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.edit-workout-name .form-control-btns {
+  justify-content: flex-end;
 }

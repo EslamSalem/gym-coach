@@ -1,0 +1,41 @@
+<%- include("../includes/head", {title: "Workouts Collection"}) %>
+<link rel="stylesheet" href="/styles/manage-plans.css">
+</head>
+<body>
+  <%- include("../includes/header") %>
+  <main>
+    <h2 class="page-heading">Workouts Collection</h2>
+    <section id="plans-grid">
+      <!--Loop Over Logs-->
+      <div class="plan-container">
+        <h3>Workout Title</h3>
+        <form class="edit-workout-name">
+          <input type="text" name="" id="" placeholder="Name..." required>
+          <div class="form-control-btns">
+            <button class="btn-main">Save</button>
+            <button type="button" class="btn-main btn-alt">Cancel</button>
+          </div>
+        </form>
+        <div class="form-control-btns">
+          <button class="btn-main btn-alt">Edit</button>
+          <button class="btn-main remove-btn">Delete</button>
+        </div>
+      </div>
+      
+      <!--End Loop-->
+
+      <div id="add-plan" class="plan-container">
+        <form>
+          <input type="text" name="log-title" placeholder="Workout Name..." required>
+          <div class="form-control-btns">
+            <button class="btn-main">Add Workout</button>
+          </div>
+        </form>
+      </div>
+      
+
+    </section>
+  </main>
+  <%- include("../includes/footer") %>
+</body>
+</html>
