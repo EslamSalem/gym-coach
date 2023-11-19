@@ -2,13 +2,19 @@ form {
   text-align: center;
 }
 
-input,
-select,
-textarea {
+input {
   margin-top: 1rem;
 }
 
-.workout-details {
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.workout-details,
+.meals-list {
+  margin-top: 1rem;
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -17,10 +23,15 @@ textarea {
 
 .workout-details input {
   width: 4rem;
+  margin: 0;
 }
 
 .workout-details select {
   width: auto;
+}
+
+.remove-btn {
+  padding: 0.25rem;
 }
 
 #add-fields-btn {

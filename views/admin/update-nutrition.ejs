@@ -14,17 +14,22 @@
         placeholder="Nutrition Title..."
         required
       />
-      <!--Loop Through Meals-->
-      <div class="meals-list">
-        <textarea
-          name="meal-description"
-          id="meal-description"
-          rows="1"
-          placeholder="Meal Description..."
-          required
-        ></textarea>
-      </div>
-      <!--End Loop-->
+      <ul>
+        <!--Loop Through Meals-->
+        <li>
+          <div class="meals-list">
+            <textarea
+              name="meal-description"
+              id="meal-description"
+              rows="1"
+              placeholder="Meal Description..."
+              required
+            ></textarea>
+            <button type="button" class="btn-main remove-btn">Remove</button>
+          </div>
+        </li>
+        <!--End Loop-->
+      </ul>
       <button type="button" class="btn-main" id="add-fields-btn">Add Meal</button>
       <div id="form-control-btns">
         <button class="btn-main btn-alt">Save</button>
