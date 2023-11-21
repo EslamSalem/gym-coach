@@ -1,15 +1,18 @@
 <header>
   <a href="/" class="page-logo">Gym Coach</a>
   <nav>
-    <a href="/signup">Signup</a>
-    <a href="/login">Login</a>
-    <a href="/expired">[DEMO] Expired</a>
-    <a href="/program">[DEMO] My Program</a>
-    <a href="/admin/users">[ADMIN] Manage Users</a>
-    <a href="/admin/logs">[ADMIN] Manage Workout Logs</a>
-    <a href="/admin/nutrition">[ADMIN] Manage Nutrition Plans</a>
-    <a href="/admin/logs/update">[DEMO] Update Workout Log</a>
-    <a href="/admin/nutrition/update">[DEMO] Update Nutrition Plan</a>
+    <% if (!locals.isAuthenticated) { %>
+      <a href="/signup">Signup</a>
+      <a href="/login">Login</a>
+    <% } %>
+    <% if (locals.isAdmin) { %>
+      <a href="/admin/users">Manage Users</a>
+      <a href="/admin/logs">Manage Workout Logs</a>
+      <a href="/admin/nutrition">Manage Nutrition Plans</a>
+    <% } %>
+    <% if (locals.isAuthenticated) { %>
+      <a href="/logout">Logout</a>
+    <% } %>
   </nav>
   <%- include("drawer-button") %>
 </header>

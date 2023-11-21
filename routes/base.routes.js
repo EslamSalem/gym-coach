@@ -1,21 +1,21 @@
 const express = require("express");
 
+const baseController = require("../controllers/base.controller");
+
 const router = express.Router();
 
-router.get("/", function(req, res) {
-  res.render("home");
-});
+router.get("/", baseController.getHome);
 
-router.get("/signup", function(req, res) {
-  res.render("signup");
-});
+router.get("/signup", baseController.getSignup);
 
-router.get("/login", function(req, res) {
-  res.render("login");
-});
+router.post("/signup", baseController.signup);
 
-router.get("/expired", function(req, res) {
-  res.render("expired");
-});
+router.get("/login", baseController.getLogin);
+
+router.post("/login", baseController.login);
+
+router.get("/expired", baseController.getExpired);
+
+router.get("/logout", baseController.logout);
 
 module.exports = router;
