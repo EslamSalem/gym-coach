@@ -1,11 +1,12 @@
 section {
   width: 90%;
-  max-width: 40rem;
+  max-width: 45rem;
   margin: auto;
 }
 
 div {
   margin-bottom: 4rem;
+  text-align: center;
 }
 
 main p {

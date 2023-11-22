@@ -1,0 +1,17 @@
+<%- include("includes/head", {title: "Not Authenticated!"}) %>
+<link rel="stylesheet" href="/styles/error.css">
+</head>
+<body>
+  <%- include("includes/header") %>
+  <main>
+    <section>
+      <h2 class="page-heading">Not Authenticated</h2>
+      <div>
+        <p>You are not authenticated. Please login to get authenticated.</p>
+        <a href="/login" class="btn-main">Login</a>
+      </div>
+    </section>
+  </main>
+  <%- include("includes/footer") %>
+</body>
+</html>
