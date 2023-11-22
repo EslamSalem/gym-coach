@@ -1,10 +1,11 @@
 const express = require("express");
 const expressSession = require("express-session");
-const csrf = require("csrf-csrf");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 
 const db = require("./data/database");
 const createSessionConfig = require("./utility/session-config");
+const { doubleCsrfProtection } = require("./utility/csrf-config");
 const addCSRFToken = require("./middlewares/csrf-token");
 const checkAuthentication = require("./middlewares/check-authentication");
 const baseRoutes = require("./routes/base.routes");
@@ -19,10 +20,11 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}));
 
+app.use(cookieParser());
 app.use(expressSession(createSessionConfig()));
-// app.use(csrf());
+app.use(doubleCsrfProtection);
 
-// app.use(addCSRFToken);
+app.use(addCSRFToken);
 app.use(checkAuthentication);
 
 app.use(baseRoutes);

@@ -9,6 +9,7 @@
       <p id="error-msg"><%= sessionData.message %></p>
     <% } %>
     <form action="/signup" method="POST">
+      <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
       <label for="name">Name</label>
       <input
         type="text"

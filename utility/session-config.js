@@ -20,7 +20,8 @@ function createSessionConfig() {
     saveUninitialized: false,
     store: createSessionStore(),
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 2
+      maxAge: 1000 * 60 * 60 * 24 * 2,
+      sameSite: "lax",
     }
   };
 }
