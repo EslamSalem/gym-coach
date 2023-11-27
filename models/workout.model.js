@@ -10,7 +10,7 @@ class Workout {
     }
   }
 
-  async getAllWorkouts() {
+  static async getAllWorkouts() {
     const workoutDocuments = await db
       .getDB()
       .collection("workouts")
@@ -22,13 +22,13 @@ class Workout {
     });
   }
 
-  async getWorkoutByID(id) {
+  static async getWorkoutByID(id) {
     const workoutID = new mongodb.ObjectId(id);
 
     const workoutDocument = await db
       .getDB()
       .collection("workouts")
-      .find({ _id: workoutID });
+      .findOne({ _id: workoutID });
 
     if (workoutDocument) {
       return new Workout(workoutDocument.name, workoutDocument._id);
@@ -37,15 +37,15 @@ class Workout {
     }
   }
 
-  async save() {
+  save() {
     if (this.id) {
       const workoutID = new mongodb.ObjectId(this.id);
-      await db
+      return db
         .getDB()
         .collection("workouts")
         .updateOne({ _id: workoutID }, { $set: { name: this.name } });
     } else {
-      await db.getDB().collection("workouts").insertOne({ name: this.name });
+      return db.getDB().collection("workouts").insertOne({ name: this.name });
     }
   }
 

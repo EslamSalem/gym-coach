@@ -128,7 +128,7 @@ async function login(req, res, next) {
     if (user.isAdmin) {
     res.redirect("/admin/users");
     } else {
-      res.redirect("/program");
+      res.redirect(`/program/${user.id}`);
     }
   });
 }

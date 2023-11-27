@@ -1,29 +1,25 @@
 const express = require("express");
 
+const adminController = require("../controllers/admin.controller");
+
 const router = express.Router();
 
-router.get("/users", function(req, res) {  // /admin/users
-  res.render("admin/manage-users");
-});
+router.get("/users", adminController.getUsers);  //  /admin/users
 
-router.get("/logs", function(req, res) {  // /admin/logs
-  res.render("admin/manage-logs");
-});
+router.get("/logs", adminController.getLogs);  //  /admin/logs
 
-router.get("/logs/workouts", function(req, res) {  //  /admin/logs/workouts
-  res.render("admin/workouts-collection");
-});
+router.get("/logs/workouts", adminController.getWorkouts);  //  /admin/logs/workouts
 
-router.get("/nutrition", function(req, res) {  // /admin/nutrition
-  res.render("admin/manage-nutrition");
-});
+router.post("/logs/workouts", adminController.addWorkout);  //  /admin/logs/workouts
 
-router.get("/logs/update", function(req, res) {  // /admin/logs/update
-  res.render("admin/update-logs");
-});
+router.patch("/logs/workouts/:id", adminController.updateWorkout);   //  /admin/logs/workouts/workoutID
 
-router.get("/nutrition/update", function(req, res) {  // /admin/nutrition/update
-  res.render("admin/update-nutrition");
-});
+router.delete("/logs/workouts/:id", adminController.deleteWorkout);   //  /admin/logs/workouts/workoutID
+
+router.get("/nutrition", adminController.getNutrition);  //  /admin/nutrition
+
+router.get("/logs/update", adminController.getUpdateLogs);  //  /admin/logs/update
+
+router.get("/nutrition/update", adminController.getUpdateNutrition);  //  /admin/nutrition/update
 
 module.exports = router;

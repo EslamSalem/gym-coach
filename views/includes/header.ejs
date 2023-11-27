@@ -6,7 +6,7 @@
       <a href="/login">Login</a>
     <% } %>
     <% if (locals.isAuthenticated && !locals.isAdmin) { %>
-      <a href="/program">My Program</a>
+      <a href="/program/<%= locals.uid %>">My Program</a>
     <% } %>
     <% if (locals.isAdmin) { %>
       <a href="/admin/users">Manage Users</a>
