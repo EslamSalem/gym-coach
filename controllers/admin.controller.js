@@ -1,12 +1,53 @@
 const Workout = require("../models/workout.model");
 const Nutrition = require("../models/nutrition.model");
+const Log = require("../models/log.model");
 
 function getUsers(req, res, next) {
   res.render("admin/manage-users");
 }
 
-function getLogs(req, res, next) {
-  res.render("admin/manage-logs");
+async function getLogs(req, res, next) {
+  let logs;
+  try {
+    logs = await Log.getAllLogs();
+    console.log(logs);
+  } catch (error) {
+    return next(error);
+  }
+  res.render("admin/manage-logs", {
+    logs: JSON.stringify(logs),
+  });
+}
+
+async function addLog(req, res, next) {
+  const logName = req.body.name;
+  let log = new Log(logName);
+
+  try {
+    const insertResult = await log.save();
+    const logID = insertResult.insertedId.toString();
+    log = await Log.getLogByID(logID);
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({
+    addedLog: log,
+  });
+}
+
+async function deleteLog(req, res, next) {
+  const logID = req.params.id;
+
+  let log;
+  try {
+    log = await Log.getLogByID(logID);
+    await log.delete();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({});
 }
 
 async function getWorkouts(req, res, next) {
@@ -16,7 +57,6 @@ async function getWorkouts(req, res, next) {
   } catch (error) {
     return next(error);
   }
-
   res.render("admin/workouts-collection", {
     workouts: JSON.stringify(workouts),
   });
@@ -78,7 +118,6 @@ async function getNutrition(req, res, next) {
   } catch (error) {
     return next(error);
   }
-
   res.render("admin/manage-nutrition", {
     nutrition: JSON.stringify(nutrition),
   });
@@ -126,6 +165,8 @@ function getUpdateNutrition(req, res, next) {
 module.exports = {
   getUsers: getUsers,
   getLogs: getLogs,
+  addLog: addLog,
+  deleteLog: deleteLog,
   getWorkouts: getWorkouts,
   addWorkout: addWorkout,
   updateWorkout: updateWorkout,

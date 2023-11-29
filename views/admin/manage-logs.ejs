@@ -1,79 +1,39 @@
 <%- include("../includes/head", {title: "Manage Workout Logs"}) %>
 <link rel="stylesheet" href="/styles/manage-plans.css">
+<script src="/scripts/manage-logs-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
-  <main>
+  <main id="manage-logs">
     <h2 class="page-heading">Manage Workout Logs</h2>
     <a href="/admin/logs/workouts" class="btn-main">Workouts Collection</a>
+    <!--Pass the logs JSON file to vue in a hidden input-->
+    <input type="hidden" id="logs" value="<%= logs %>" />
     <section id="plans-grid">
       <!--Loop Over Logs-->
-      <div class="plan-container">
-        <h3>Log Title</h3>
+      <div class="plan-container" v-for="log in logs">
+        <h3>{{ log.name }}</h3>
         <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-          <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-            repudiandae quod explicabo. Blanditiis tempore explicabo
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
+          <li v-for="exercise in log.exercises">
+            {{exercise.name}}: {{exercise.sets}} sets of {{exercise.reps}}
           </li>
         </ul>
         <div class="form-control-btns">
           <button class="btn-main btn-alt">Edit</button>
-          <button class="btn-main remove-btn">Delete</button>
-        </div>
-      </div>
-      <div class="plan-container">
-        <h3>Log Title</h3>
-        <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-          <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-            repudiandae quod explicabo. Blanditiis tempore explicabo
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-        </ul>
-        <div class="form-control-btns">
-          <button class="btn-main btn-alt">Edit</button>
-          <button class="btn-main remove-btn">Delete</button>
-        </div>
-      </div>
-      <div class="plan-container">
-        <h3>Log Title</h3>
-        <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-          <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-            repudiandae quod explicabo. Blanditiis tempore explicabo
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-        </ul>
-        <div class="form-control-btns">
-          <button class="btn-main btn-alt">Edit</button>
-          <button class="btn-main remove-btn">Delete</button>
+          <form @submit="deleteLog">
+            <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>" />
+            <input type="hidden"  name="log-id" v-bind:value="log.id">
+            <button class="btn-main remove-btn">Delete</button>
+          </form>
         </div>
       </div>
       
       <!--End Loop-->
 
       <div id="add-plan" class="plan-container">
-        <form>
-          <input type="text" name="log-title" placeholder="Log Name..." required>
+        <form @submit="addLog">
+          <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
+          <input type="text" name="log-name" placeholder="Log Name..." required>
           <div class="form-control-btns">
             <button class="btn-main">Add Workout Log</button>
           </div>

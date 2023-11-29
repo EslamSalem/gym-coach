@@ -35,6 +35,10 @@ main p {
   font-weight: bold;
 }
 
+.plan-container li {
+  font-size: 1.25rem;
+}
+
 .form-control-btns {
   display: flex;
   justify-content: center;

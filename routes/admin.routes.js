@@ -8,6 +8,10 @@ router.get("/users", adminController.getUsers);  //  /admin/users
 
 router.get("/logs", adminController.getLogs);  //  /admin/logs
 
+router.post("/logs", adminController.addLog);  //  /admin/logs
+
+router.delete("/logs/:id", adminController.deleteLog);  //  /admin/logs/logID
+
 router.get("/logs/workouts", adminController.getWorkouts);  //  /admin/logs/workouts
 
 router.post("/logs/workouts", adminController.addWorkout);  //  /admin/logs/workouts
