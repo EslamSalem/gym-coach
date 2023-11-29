@@ -8,7 +8,9 @@ const workoutsCollectionApp = {
     async addWorkout(event) {
       event.preventDefault();
 
-      const formData = new FormData(event.target);
+      const form = event.target;
+
+      const formData = new FormData(form);
       const workoutName = formData.get("workout-name");
       const csrfToken = formData.get("csrfToken");
 
@@ -42,7 +44,7 @@ const workoutsCollectionApp = {
       };
 
       this.workouts.push(workout);
-      this.addWorkoutName = "";
+      form.firstElementChild.nextElementSibling.value = "";
     },
     async updateWorkout(event) {
       event.preventDefault();
@@ -124,7 +126,7 @@ const workoutsCollectionApp = {
       const editWorkoutForm =
         pressedButton.parentElement.previousElementSibling;
       const editWorkoutInput =
-        pressedButton.parentElement.previousElementSibling.firstElementChild;
+        pressedButton.parentElement.previousElementSibling.lastElementChild.previousElementSibling;;
 
       editWorkoutForm.classList.remove("invisible");
       editWorkoutInput.focus();
@@ -138,7 +140,7 @@ const workoutsCollectionApp = {
       editWorkoutInput.value = "";
     },
   },
-  async mounted() {
+  mounted() {
     this.workouts = JSON.parse(document.getElementById("workouts").value);
   },
 };

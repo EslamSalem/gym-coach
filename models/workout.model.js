@@ -49,9 +49,9 @@ class Workout {
     }
   }
 
-  async delete() {
+  delete() {
     const workoutID = new mongodb.ObjectId(this.id);
-    await db.getDB().collection("workouts").deleteOne({ _id: workoutID });
+    return db.getDB().collection("workouts").deleteOne({ _id: workoutID });
   }
 }
 

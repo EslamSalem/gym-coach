@@ -1,78 +1,37 @@
 <%- include("../includes/head", {title: "Manage Nutrition Plans"}) %>
 <link rel="stylesheet" href="/styles/manage-plans.css">
+<script src="/scripts/manage-nutrition-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
-  <main>
+  <main id="manage-nutrition">
     <h2 class="page-heading">Manage Nutrition</h2>
+    <!--Pass the nutrition JSON file to vue in a hidden input-->
+    <input type="hidden" id="nutrition" value="<%= nutrition %>" />
     <section id="plans-grid">
       <!--Loop Over Nutrition Plans-->
-      <div class="plan-container">
-        <h3>Nutrition Title</h3>
+      <div class="plan-container" v-for="plan in nutrition">
+        <h3>{{ plan.name }}</h3>
         <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-          <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-            repudiandae quod explicabo. Blanditiis tempore explicabo
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
+          <!--Loop over meals in nutrition plan-->
+          <li v-for="meal in plan.meals">
+            {{ meal }}
           </li>
         </ul>
         <div class="form-control-btns">
           <button class="btn-main btn-alt">Edit</button>
-          <button class="btn-main remove-btn">Delete</button>
+          <form @submit="deleteNutrition">
+            <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>" />
+            <input type="hidden"  name="nutrition-id" v-bind:value="plan.id">
+            <button class="btn-main remove-btn">Delete</button>
+          </form>
         </div>
       </div>
-      <div class="plan-container">
-        <h3>Nutrition Title</h3>
-        <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-          <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-            repudiandae quod explicabo. Blanditiis tempore explicabo
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-        </ul>
-        <div class="form-control-btns">
-          <button class="btn-main btn-alt">Edit</button>
-          <button class="btn-main remove-btn">Delete</button>
-        </div>
-      </div>
-      <div class="plan-container">
-        <h3>Nutrition Title</h3>
-        <ul>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-          <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-            repudiandae quod explicabo. Blanditiis tempore explicabo
-          </li>
-          <li>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-            recusandae velit deserunt quasi magni dolores.
-          </li>
-        </ul>
-        <div class="form-control-btns">
-          <button class="btn-main btn-alt">Edit</button>
-          <button class="btn-main remove-btn">Delete</button>
-        </div>
-      </div>
-      
       <!--End Loop-->
-
       <div id="add-plan" class="plan-container">
-        <form>
-          <input type="text" name="nutrition-title" placeholder="Plan Name..." required>
+        <form @submit="addNutrition">
+          <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
+          <input type="text" name="nutrition-name" placeholder="Plan Name..." required>
           <div class="form-control-btns">
             <button class="btn-main">Add Nutrition Plan</button>
           </div>

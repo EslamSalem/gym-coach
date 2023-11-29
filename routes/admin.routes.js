@@ -18,6 +18,10 @@ router.delete("/logs/workouts/:id", adminController.deleteWorkout);   //  /admin
 
 router.get("/nutrition", adminController.getNutrition);  //  /admin/nutrition
 
+router.post("/nutrition", adminController.addNutrition);  //  /admin/nutrition
+
+router.delete("/nutrition/:id", adminController.deleteNutrition);  //  /admin/nutrition/nutritionID
+
 router.get("/logs/update", adminController.getUpdateLogs);  //  /admin/logs/update
 
 router.get("/nutrition/update", adminController.getUpdateNutrition);  //  /admin/nutrition/update

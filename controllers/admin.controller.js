@@ -1,4 +1,5 @@
 const Workout = require("../models/workout.model");
+const Nutrition = require("../models/nutrition.model");
 
 function getUsers(req, res, next) {
   res.render("admin/manage-users");
@@ -62,7 +63,7 @@ async function deleteWorkout(req, res, next) {
   let workout;
   try {
     workout = await Workout.getWorkoutByID(workoutID);
-    workout.delete();
+    await workout.delete();
   } catch (error) {
     return next(error);
   }
@@ -70,8 +71,48 @@ async function deleteWorkout(req, res, next) {
   res.json({});
 }
 
-function getNutrition(req, res, next) {
-  res.render("admin/manage-nutrition");
+async function getNutrition(req, res, next) {
+  let nutrition;
+  try {
+    nutrition = await Nutrition.getAllNutrition();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.render("admin/manage-nutrition", {
+    nutrition: JSON.stringify(nutrition),
+  });
+}
+
+async function addNutrition(req, res, next) {
+  const nutritionName = req.body.name;
+  let nutrition = new Nutrition(nutritionName);
+
+  try {
+    const insertResult = await nutrition.save();
+    const nutritionID = insertResult.insertedId.toString();
+    nutrition = await Nutrition.getNutritionByID(nutritionID);
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({
+    addedNutrition: nutrition,
+  });
+}
+
+async function deleteNutrition(req, res, next) {
+  const nutritionID = req.params.id;
+
+  let nutrition;
+  try {
+    nutrition = await Nutrition.getNutritionByID(nutritionID);
+    await nutrition.delete();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({});
 }
 
 function getUpdateLogs(req, res, next) {
@@ -90,6 +131,8 @@ module.exports = {
   updateWorkout: updateWorkout,
   deleteWorkout: deleteWorkout,
   getNutrition: getNutrition,
+  addNutrition: addNutrition,
+  deleteNutrition: deleteNutrition,
   getUpdateLogs: getUpdateLogs,
   getUpdateNutrition: getUpdateNutrition,
 };
