@@ -46,7 +46,7 @@ const manageLogsApp = {
       this.logs.push(log);
       form.firstElementChild.nextElementSibling.value = ""; 
     },
-    async deleteLog(event) {
+    async deleteLog(event, index) {
       event.preventDefault();
 
       const form = event.target;
@@ -76,8 +76,10 @@ const manageLogsApp = {
         return;
       }
 
-      const logCard = form.parentElement.parentElement;
-      logCard.style.display = "none";
+      this.logs.splice(index, 1);
+    },
+    async getUpdateForm(logID) {
+      window.location.href = `/admin/logs/${logID}/update`;
     }
   },
   mounted() {

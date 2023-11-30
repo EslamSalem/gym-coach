@@ -46,7 +46,7 @@ const manageNutritionApp = {
       this.nutrition.push(nutritionPlan);
       form.firstElementChild.nextElementSibling.value = "";
     },
-    async deleteNutrition(event) {
+    async deleteNutrition(event, index) {
       event.preventDefault();
 
       const form = event.target;
@@ -76,8 +76,10 @@ const manageNutritionApp = {
         return;
       }
 
-      const nutritionPlanCard = form.parentElement.parentElement;
-      nutritionPlanCard.style.display = "none";
+      this.nutrition.splice(index, 1);
+    },
+    async getUpdateForm(nutritionID) {
+      window.location.href = `/admin/nutrition/${nutritionID}/update`;
     }
   },
   mounted() {

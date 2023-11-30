@@ -12,6 +12,10 @@ router.post("/logs", adminController.addLog);  //  /admin/logs
 
 router.delete("/logs/:id", adminController.deleteLog);  //  /admin/logs/logID
 
+router.get("/logs/:id/update", adminController.getUpdateLogs);  //  /admin/logs/logID/update
+
+router.patch("/logs/:id/update", adminController.updateLog);  //  /admin/logs/logID/update
+
 router.get("/logs/workouts", adminController.getWorkouts);  //  /admin/logs/workouts
 
 router.post("/logs/workouts", adminController.addWorkout);  //  /admin/logs/workouts
@@ -26,8 +30,6 @@ router.post("/nutrition", adminController.addNutrition);  //  /admin/nutrition
 
 router.delete("/nutrition/:id", adminController.deleteNutrition);  //  /admin/nutrition/nutritionID
 
-router.get("/logs/update", adminController.getUpdateLogs);  //  /admin/logs/update
-
-router.get("/nutrition/update", adminController.getUpdateNutrition);  //  /admin/nutrition/update
+router.get("/nutrition/:id/update", adminController.getUpdateNutrition);  //  /admin/nutrition/nutritionID/update
 
 module.exports = router;

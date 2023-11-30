@@ -16,24 +16,18 @@ class Log {
   static async getAllLogs() {
     const logDocuments = await db.getDB().collection("logs").find().toArray();
 
-    console.log(logDocuments);
-
     return Promise.all(logDocuments.map(async function (logDocument) {
-
-      console.log(logDocument.exercises);
-
       let mappedExercises = [];
 
       if (logDocument.exercises) {
         mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
-
           const workout = await Workout.getWorkoutByID(exercise.workoutID);
 
           const mappedExercise = {
             workoutID: exercise.workoutID,
+            name: workout.name,
             sets: exercise.sets,
             reps: exercise.reps,
-            name: workout.name,
           };
           
           return mappedExercise;
@@ -54,17 +48,18 @@ class Log {
 
       let mappedExercises = [];
       if (logDocument.exercises) {
-        mappedExercises = logDocument.exercises.map(async function(exercise) {
+        mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
           const workout = await Workout.getWorkoutByID(exercise.workoutID);
     
           const mappedExercise = {
             workoutID: exercise.workoutID,
+            name: workout.name,
             sets: exercise.sets,
             reps: exercise.reps,
-            name: workout.name,
           };
+
           return mappedExercise;
-        });
+        }));
       }
 
     if (logDocument) {

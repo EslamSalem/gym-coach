@@ -1,49 +1,85 @@
 <%- include("../includes/head", {title: "Update Workout Log"}) %>
 <link rel="stylesheet" href="/styles/forms.css" />
 <link rel="stylesheet" href="/styles/update-forms.css" />
+<script src="/scripts/update-logs-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
-  <main>
+  <main id="update-logs">
     <h2 class="page-heading">Update Workout Log</h2>
-    <form>
+    <!--Pass the log to vue to render input fields to the number of exercises-->
+    <input type="hidden" id="log" value="<%= log %>" />
+    <form @submit="updateLog">
+      <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
       <input
         type="text"
-        name="log-title"
-        id="log-title"
-        placeholder="Log Title..."
+        name="log-name"
+        placeholder="Log Name..."
+        v-model="logNameInput"
         required
       />
       <ul>
-        <!--Loop Through Workouts-->
-        <li>
+        <!--Pass all workouts in the database-->
+        <input type="hidden" id="workouts" value="<%= workouts %>" />
+        <!--Loop Through exercises-->
+        <li v-for="(exercise, index) in log.exercises">
           <div class="workout-details">
-            <select name="workout" class="workout" required>
-              <option value="" disabled selected>Choose Workout</option>
-              <option value="[Workout ID]">[Workout Title]</option>
-              <option value="[Workout ID]">[Workout Title]</option>
-              <option value="[Workout ID]">[Workout Title]</option>
+            <select @change="updateExerciseWorkout($event, index)" name="workout" class="workout" required>
+              <option
+                value=""
+                disabled
+                v-bind:selected="exercise.workoutID === ''"
+              >
+                Choose Workout
+              </option>
+              <!--Loop through workouts in the database-->
+              <option
+                v-for="workout in workouts"
+                v-bind:value="workout.id"
+                v-bind:selected="exercise.workoutID === workout.id"
+              >
+                {{ workout.name }}
+              </option>
             </select>
             <input
+              @input="updateExerciseSets($event, index)"
               type="number"
               name="sets"
               class="sets"
               placeholder="Sets..."
+              v-bind:value="exercise.sets"
+              min="0"
               required
             />
             <input
+              @input="updateExerciseReps($event, index)"
               type="number"
               name="reps"
               class="reps"
               placeholder="Reps..."
+              v-bind:value="exercise.reps"
+              min="0"
               required
             />
-            <button type="button" class="btn-main remove-btn">Remove</button>
+            <button
+              @click="removeExerciseInput(index)"
+              type="button"
+              class="btn-main remove-btn"
+            >
+              Remove
+            </button>
           </div>
         </li>
         <!--End Loop-->
       </ul>
-      <button type="button" class="btn-main" id="add-fields-btn">Add Workout</button>
+      <button
+        @click="addExerciseInput"
+        type="button"
+        class="btn-main"
+        id="add-fields-btn"
+      >
+        Add Workout
+      </button>
       <div id="form-control-btns">
         <button class="btn-main btn-alt">Save</button>
       </div>

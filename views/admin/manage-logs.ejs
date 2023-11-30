@@ -11,7 +11,7 @@
     <input type="hidden" id="logs" value="<%= logs %>" />
     <section id="plans-grid">
       <!--Loop Over Logs-->
-      <div class="plan-container" v-for="log in logs">
+      <div class="plan-container" v-for="(log, index) in logs">
         <h3>{{ log.name }}</h3>
         <ul>
           <li v-for="exercise in log.exercises">
@@ -19,8 +19,8 @@
           </li>
         </ul>
         <div class="form-control-btns">
-          <button class="btn-main btn-alt">Edit</button>
-          <form @submit="deleteLog">
+          <button @click="getUpdateForm(log.id)" class="btn-main btn-alt">Edit</button>
+          <form @submit="deleteLog($event, index)">
             <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>" />
             <input type="hidden"  name="log-id" v-bind:value="log.id">
             <button class="btn-main remove-btn">Delete</button>

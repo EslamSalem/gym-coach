@@ -10,7 +10,6 @@ async function getLogs(req, res, next) {
   let logs;
   try {
     logs = await Log.getAllLogs();
-    console.log(logs);
   } catch (error) {
     return next(error);
   }
@@ -154,8 +153,37 @@ async function deleteNutrition(req, res, next) {
   res.json({});
 }
 
-function getUpdateLogs(req, res, next) {
-  res.render("admin/update-logs");
+async function getUpdateLogs(req, res, next) {
+  const logID = req.params.id;
+
+  let log;
+  let workouts;
+  try {
+    log = await Log.getLogByID(logID);
+    workouts = await Workout.getAllWorkouts();
+  } catch (error) {
+    return next(error);
+  }
+  res.render("admin/update-logs", {
+    log: JSON.stringify(log),
+    workouts: JSON.stringify(workouts),
+  });
+}
+
+async function updateLog(req, res, next) {
+  const logID = req.params.id;
+
+  let log;
+  try {
+    log = await Log.getLogByID(logID);
+    log.name = req.body.name;
+    log.exercises = req.body.exercises;
+    await log.save();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({});
 }
 
 function getUpdateNutrition(req, res, next) {
@@ -166,6 +194,7 @@ module.exports = {
   getUsers: getUsers,
   getLogs: getLogs,
   addLog: addLog,
+  updateLog: updateLog,
   deleteLog: deleteLog,
   getWorkouts: getWorkouts,
   addWorkout: addWorkout,

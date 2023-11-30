@@ -10,7 +10,7 @@
     <input type="hidden" id="nutrition" value="<%= nutrition %>" />
     <section id="plans-grid">
       <!--Loop Over Nutrition Plans-->
-      <div class="plan-container" v-for="plan in nutrition">
+      <div class="plan-container" v-for="(plan, index) in nutrition">
         <h3>{{ plan.name }}</h3>
         <ul>
           <!--Loop over meals in nutrition plan-->
@@ -19,8 +19,8 @@
           </li>
         </ul>
         <div class="form-control-btns">
-          <button class="btn-main btn-alt">Edit</button>
-          <form @submit="deleteNutrition">
+          <button @click="getUpdateForm(plan.id)" class="btn-main btn-alt">Edit</button>
+          <form @submit="deleteNutrition($event, index)">
             <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>" />
             <input type="hidden"  name="nutrition-id" v-bind:value="plan.id">
             <button class="btn-main remove-btn">Delete</button>
