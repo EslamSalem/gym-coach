@@ -186,15 +186,40 @@ async function updateLog(req, res, next) {
   res.json({});
 }
 
-function getUpdateNutrition(req, res, next) {
-  res.render("admin/update-nutrition");
+async function getUpdateNutrition(req, res, next) {
+  const nutritionID = req.params.id;
+
+  let nutrition;
+  try {
+    nutrition = await Nutrition.getNutritionByID(nutritionID);
+  } catch (error) {
+    return next(error);
+  }
+  res.render("admin/update-nutrition", {
+    nutrition: JSON.stringify(nutrition),
+  });
+}
+
+async function updateNutrition(req, res, next) {
+  const nutritionID = req.params.id;
+
+  let nutrition;
+  try {
+    nutrition = await Nutrition.getNutritionByID(nutritionID);
+    nutrition.name = req.body.name;
+    nutrition.meals = req.body.meals;
+    await nutrition.save();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({});
 }
 
 module.exports = {
   getUsers: getUsers,
   getLogs: getLogs,
   addLog: addLog,
-  updateLog: updateLog,
   deleteLog: deleteLog,
   getWorkouts: getWorkouts,
   addWorkout: addWorkout,
@@ -204,5 +229,7 @@ module.exports = {
   addNutrition: addNutrition,
   deleteNutrition: deleteNutrition,
   getUpdateLogs: getUpdateLogs,
+  updateLog: updateLog,
   getUpdateNutrition: getUpdateNutrition,
+  updateNutrition: updateNutrition,
 };

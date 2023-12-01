@@ -1,36 +1,43 @@
 <%- include("../includes/head", {title: "Update Nutrition Plan"}) %>
 <link rel="stylesheet" href="/styles/forms.css" />
 <link rel="stylesheet" href="/styles/update-forms.css" />
+<script src="/scripts/update-nutrition-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
-  <main>
+  <main id="update-nutrition">
     <h2 class="page-heading">Update Nutrition Plan</h2>
-    <form>
+    <!--Pass the nutrition to vue to render input fields to the number of meals-->
+    <input type="hidden" id="nutrition" value="<%= nutrition %>" />
+    <form @submit="updateNutrition">
+      <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
       <input
+        @input="updateName"
         type="text"
         name="nutrition-title"
-        id="nutrition-title"
-        placeholder="Nutrition Title..."
+        placeholder="Nutrition Plan Name..."
+        v-bind:value="nutrition.name"
         required
       />
       <ul>
         <!--Loop Through Meals-->
-        <li>
+        <li v-for="(meal, index) in nutrition.meals">
           <div class="meals-list">
             <textarea
+              @input="updateMeal(index)"
+              v-model="mealDescriptions[index]"
               name="meal-description"
               id="meal-description"
               rows="1"
               placeholder="Meal Description..."
               required
             ></textarea>
-            <button type="button" class="btn-main remove-btn">Remove</button>
+            <button @click="removeMealInput(index)" type="button" class="btn-main remove-btn">Remove</button>
           </div>
         </li>
         <!--End Loop-->
       </ul>
-      <button type="button" class="btn-main" id="add-fields-btn">Add Meal</button>
+      <button @click="addMealInput" type="button" class="btn-main" id="add-fields-btn">Add Meal</button>
       <div id="form-control-btns">
         <button class="btn-main btn-alt">Save</button>
       </div>

@@ -32,4 +32,6 @@ router.delete("/nutrition/:id", adminController.deleteNutrition);  //  /admin/nu
 
 router.get("/nutrition/:id/update", adminController.getUpdateNutrition);  //  /admin/nutrition/nutritionID/update
 
+router.patch("/nutrition/:id/update", adminController.updateNutrition);  //  /admin/nutrition/nutritionID/update
+
 module.exports = router;

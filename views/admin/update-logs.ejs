@@ -12,10 +12,11 @@
     <form @submit="updateLog">
       <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
       <input
+        @input="updateLogName"
         type="text"
         name="log-name"
-        placeholder="Log Name..."
-        v-model="logNameInput"
+        placeholder="Workout Log Name..."
+        v-bind:value="log.name"
         required
       />
       <ul>

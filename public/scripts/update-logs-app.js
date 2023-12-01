@@ -3,7 +3,6 @@ const updateLogsApp = {
     return {
       log: "",
       workouts: [],
-      logNameInput: "",
     };
   },
   methods: {
@@ -18,6 +17,9 @@ const updateLogsApp = {
     },
     removeExerciseInput(index) {
       this.log.exercises.splice(index, 1);
+    },
+    updateLogName(event) {
+      this.log.name = event.target.value;
     },
     updateExerciseWorkout(event, index) {
       this.log.exercises[index].workoutID = event.target.value;
@@ -35,9 +37,7 @@ const updateLogsApp = {
       event.preventDefault();
 
       const form = event.target;
-
       const formData = new FormData(form);
-      const logName = formData.get("log-name");
       const csrfToken = formData.get("csrfToken");
 
       let response;
@@ -45,7 +45,7 @@ const updateLogsApp = {
         response = await fetch(`/admin/logs/${this.log.id}/update`, {
           method: "PATCH",
           body: JSON.stringify({
-            name: logName,
+            name: this.log.name,
             exercises: this.log.exercises,
             csrfToken: csrfToken,
           }),
@@ -63,13 +63,12 @@ const updateLogsApp = {
         return;
       }
 
-      window.location.href = `/admin/logs`;
+      window.location.href = "/admin/logs";
     }
   },
   mounted() {
     this.log = JSON.parse(document.getElementById("log").value);
     this.workouts = JSON.parse(document.getElementById("workouts").value);
-    this.logNameInput = this.log.name;
   }
 };
 
