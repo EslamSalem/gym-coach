@@ -6,6 +6,10 @@ const router = express.Router();
 
 router.get("/users", adminController.getUsers);  //  /admin/users
 
+router.patch("/users/:id/updateLogs", adminController.updateUserLogs);  //  /admin/user/userID/updateLogs
+
+router.patch("/users/:id/updateNutrition", adminController.updateUserNutrition);  //  /admin/user/userID/updateLogs
+
 router.get("/logs", adminController.getLogs);  //  /admin/logs
 
 router.post("/logs", adminController.addLog);  //  /admin/logs

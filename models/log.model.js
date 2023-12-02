@@ -46,21 +46,21 @@ class Log {
       .collection("logs")
       .findOne({ _id: logID });
 
-      let mappedExercises = [];
-      if (logDocument.exercises) {
-        mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
-          const workout = await Workout.getWorkoutByID(exercise.workoutID);
-    
-          const mappedExercise = {
-            workoutID: exercise.workoutID,
-            name: workout.name,
-            sets: exercise.sets,
-            reps: exercise.reps,
-          };
+    let mappedExercises = [];
+    if (logDocument.exercises) {
+      mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
+        const workout = await Workout.getWorkoutByID(exercise.workoutID);
+  
+        const mappedExercise = {
+          workoutID: exercise.workoutID,
+          name: workout.name,
+          sets: exercise.sets,
+          reps: exercise.reps,
+        };
 
-          return mappedExercise;
-        }));
-      }
+        return mappedExercise;
+      }));
+    }
 
     if (logDocument) {
       return new Log(logDocument.name, mappedExercises, logDocument._id);

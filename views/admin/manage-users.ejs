@@ -1,79 +1,100 @@
 <%- include("../includes/head", {title: "Manage Users"}) %>
-<link rel="stylesheet" href="/styles/manage-users.css">
+<link rel="stylesheet" href="/styles/manage-users.css" />
+<script src="/scripts/manage-users-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
-  <main>
+  <main id="manage-users">
     <section>
       <h2 class="page-heading">Manage Users</h2>
       <div id="search-bar">
-        <input type="text" placeholder="Search Users">
+        <input type="text" placeholder="Search Users" />
       </div>
+
+      <!--Pass the data to vue in a hidden input-->
+      <input type="hidden" id="users" value="<%= users %>" />
+      <input type="hidden" id="logs" value="<%= logs %>" />
+      <input type="hidden" id="nutrition" value="<%= nutrition %>" />
+
       <ul id="users-list">
-        <li class="user-item">
+        <!--Loop Over Users-->
+
+        <li class="user-item" v-for="(user, index) in users">
           <div class="user-details">
-            <h3>[User Name]</h3>
-            <h3><a href="mailto:[User Email]">[User Email]</a></h3>
-            <h3>[Expiry Date] <!-- Subscription Date + 1 Month --></h3>
+            <h3>{{ user.name }}</h3>
+            <h3>
+              <a v-bind:href="'mailto:' + user.email">{{ user.email }}</a>
+            </h3>
+            <h3>
+              [Expiry Date]
+              <!-- Subscription Date + 1 Month -->
+            </h3>
           </div>
           <div class="user-workouts">
             <!--Loop Over Logs-->
 
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            <div class="log-group" v-for="(log, logIndex) in user.logs">
+              <p class="log-title">{{ log.name }}</p>
+              <form @submit="removeLog($event, index, logIndex)">
+                <input
+                type="hidden"
+                name="csrfToken"
+                value="<%= locals.csrfToken %>"
+                />
+                <button class="btn-main log-btn remove-btn">
+                  -
+                </button>
+              </form>
             </div>
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
-            </div>
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
-            </div>
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
-            </div>
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
-            </div>
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
-            </div>
-            <div class="log-group">
-              <p class="log-title">[Log Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
-            </div>
-            
+
             <!--End loop-->
 
-            <form class="log-group">
-              <select class="log-title" name="log-select" id="log-select" required>
-                <option value="" disabled selected>Add Workout</option>
+            <form @submit="addLog($event, index)" class="log-group">
+              <input
+                type="hidden"
+                name="csrfToken"
+                value="<%= locals.csrfToken %>"
+              />
+              <select
+                class="log-title"
+                name="log-select"
+                id="log-select"
+                required
+              >
+                <option value="" disabled selected>Add Workout Log</option>
                 <!--Loop Over Logs-->
-                <option value="[Lod ID]">[Log Title]</option>
-                <option value="[Lod ID]">[Log Title]</option>
-                <option value="[Lod ID]">[Log Title]</option>
+                <option v-for="log in logs" v-bind:value="log.id">
+                  {{ log.name }}
+                </option>
               </select>
               <button class="btn-main log-btn">+</button>
             </form>
           </div>
           <div class="user-diet">
             <!--Nutrition plan dropdown-->
-            <div class="log-group">
-              <p class="log-title">[Nutrition Title]</p>
-              <button type="button" class="btn-main log-btn remove-btn">-</button>
+            <div class="log-group" v-if="user.nutrition">
+              <p class="log-title">{{ user.nutrition.name }}</p>
+              <button type="button" class="btn-main log-btn remove-btn">
+                -
+              </button>
             </div>
-            <form class="log-group">
-              <select class="log-title" name="nutrition-select" id="nutrition-select" required>
+            <form class="log-group" v-else>
+              <input
+                type="hidden"
+                name="csrfToken"
+                value="<%= locals.csrfToken %>"
+              />
+              <select
+                class="log-title"
+                name="nutrition-select"
+                id="nutrition-select"
+                required
+              >
                 <option value="" disabled selected>Choose Diet Plan</option>
                 <!--Loop Over Logs-->
-                <option value="[Nutrition ID]">[Nutrition Title]</option>
-                <option value="[Nutrition ID]">[Nutrition Title]</option>
-                <option value="[Nutrition ID]">[Nutrition Title]</option>
+                <option v-for="plan in nutrition" v-bind:value="plan.id">
+                  {{ plan.name }}
+                </option>
               </select>
               <button class="btn-main log-btn">+</button>
             </form>
@@ -81,12 +102,14 @@
           <div class="user-access">
             <!--Giver or remove access-->
             <div class="log-group">
-              <button type="button" class="btn-main log-btn">Grant Access</button>
+              <button type="button" class="btn-main log-btn">
+                Grant Access
+              </button>
             </div>
           </div>
         </li>
-        <li class="user-item"></li>
-        <li class="user-item"></li>
+
+        <!--End Loop-->
       </ul>
     </section>
   </main>
