@@ -58,7 +58,7 @@ const workoutsCollectionApp = {
 
       let response;
       try {
-        response = await fetch(`/admin/logs/workouts/${workoutID}`, {
+        response = await fetch(`/admin/logs/workouts/${workoutID}/update`, {
           method: "PATCH",
           body: JSON.stringify({
             name: workoutName,
@@ -99,7 +99,7 @@ const workoutsCollectionApp = {
 
       let response;
       try {
-        response = await fetch(`/admin/logs/workouts/${workoutID}`, {
+        response = await fetch(`/admin/logs/workouts/${workoutID}/delete`, {
           method: "DELETE",
           body: JSON.stringify({
             csrfToken: csrfToken,

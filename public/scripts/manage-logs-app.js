@@ -57,7 +57,7 @@ const manageLogsApp = {
 
       let response;
       try {
-        response = await fetch(`/admin/logs/${logID}`, {
+        response = await fetch(`/admin/logs/${logID}/delete`, {
           method: "DELETE",
           body: JSON.stringify({
             csrfToken: csrfToken,

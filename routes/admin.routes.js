@@ -1,41 +1,86 @@
 const express = require("express");
 
-const adminController = require("../controllers/admin.controller");
+const adminUsersController = require("../controllers/admin.users.controller");
+const adminLogsController = require("../controllers/admin.logs.controller");
+const adminWorkoutsController = require("../controllers/admin.workouts.controller");
+const adminNutritionController = require("../controllers/admin.nutrition.controller");
 
 const router = express.Router();
 
-router.get("/users", adminController.getUsers);  //  /admin/users
+/* USERS ROUTES */
 
-router.patch("/users/:id/updateLogs", adminController.updateUserLogs);  //  /admin/user/userID/updateLogs
+//  /admin/users
 
-router.patch("/users/:id/updateNutrition", adminController.updateUserNutrition);  //  /admin/user/userID/updateLogs
+router.get("/users", adminUsersController.getUsers);
 
-router.get("/logs", adminController.getLogs);  //  /admin/logs
+//  /admin/user/userID/updateLogs
 
-router.post("/logs", adminController.addLog);  //  /admin/logs
+router.patch("/users/:id/updateLogs", adminUsersController.updateUserLogs);
 
-router.delete("/logs/:id", adminController.deleteLog);  //  /admin/logs/logID
+//  /admin/user/userID/updateLogs
 
-router.get("/logs/:id/update", adminController.getUpdateLogs);  //  /admin/logs/logID/update
+router.patch("/users/:id/updateNutrition", adminUsersController.updateUserNutrition);
 
-router.patch("/logs/:id/update", adminController.updateLog);  //  /admin/logs/logID/update
+/* LOGS ROUTES */
 
-router.get("/logs/workouts", adminController.getWorkouts);  //  /admin/logs/workouts
+//  /admin/logs
 
-router.post("/logs/workouts", adminController.addWorkout);  //  /admin/logs/workouts
+router.get("/logs", adminLogsController.getLogs);
 
-router.patch("/logs/workouts/:id", adminController.updateWorkout);   //  /admin/logs/workouts/workoutID
+//  /admin/logs
 
-router.delete("/logs/workouts/:id", adminController.deleteWorkout);   //  /admin/logs/workouts/workoutID
+router.post("/logs", adminLogsController.addLog);
 
-router.get("/nutrition", adminController.getNutrition);  //  /admin/nutrition
+//  /admin/logs/logID/delete
 
-router.post("/nutrition", adminController.addNutrition);  //  /admin/nutrition
+router.delete("/logs/:id/delete", adminLogsController.deleteLog);
 
-router.delete("/nutrition/:id", adminController.deleteNutrition);  //  /admin/nutrition/nutritionID
+//  /admin/logs/logID/update
 
-router.get("/nutrition/:id/update", adminController.getUpdateNutrition);  //  /admin/nutrition/nutritionID/update
+router.get("/logs/:id/update", adminLogsController.getUpdateLogs);
 
-router.patch("/nutrition/:id/update", adminController.updateNutrition);  //  /admin/nutrition/nutritionID/update
+//  /admin/logs/logID/update
+
+router.patch("/logs/:id/update", adminLogsController.updateLog);
+
+/* WORKOUTS ROUTES */
+
+//  /admin/logs/workouts
+
+router.get("/logs/workouts", adminWorkoutsController.getWorkouts);
+
+//  /admin/logs/workouts
+
+router.post("/logs/workouts", adminWorkoutsController.addWorkout);
+
+//  /admin/logs/workouts/workoutID/update
+
+router.patch("/logs/workouts/:id/update", adminWorkoutsController.updateWorkout);
+
+//  /admin/logs/workouts/workoutID/delete
+
+router.delete("/logs/workouts/:id/delete", adminWorkoutsController.deleteWorkout);
+
+/* NUTRITION ROUTES */
+
+//  /admin/nutrition
+
+router.get("/nutrition", adminNutritionController.getNutrition);
+
+//  /admin/nutrition
+
+router.post("/nutrition", adminNutritionController.addNutrition);
+
+//  /admin/nutrition/nutritionID/delete
+
+router.delete("/nutrition/:id/delete", adminNutritionController.deleteNutrition);
+
+//  /admin/nutrition/nutritionID/update
+
+router.get("/nutrition/:id/update", adminNutritionController.getUpdateNutrition);
+
+//  /admin/nutrition/nutritionID/update
+
+router.patch("/nutrition/:id/update", adminNutritionController.updateNutrition);
 
 module.exports = router;

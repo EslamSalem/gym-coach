@@ -57,7 +57,7 @@ const manageNutritionApp = {
 
       let response;
       try {
-        response = await fetch(`/admin/nutrition/${nutritionID}`, {
+        response = await fetch(`/admin/nutrition/${nutritionID}/delete`, {
           method: "DELETE",
           body: JSON.stringify({
             csrfToken: csrfToken,
