@@ -4,6 +4,7 @@ const manageUsersApp = {
       users: [],
       logs: [],
       nutrition: [],
+      searchUsersInput: "",
     };
   },
   methods: {

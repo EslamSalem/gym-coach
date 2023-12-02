@@ -8,7 +8,11 @@
     <section>
       <h2 class="page-heading">Manage Users</h2>
       <div id="search-bar">
-        <input type="text" placeholder="Search Users" />
+        <input
+          v-model="searchUsersInput"
+          type="text"
+          placeholder="Search Users By Name"
+        />
       </div>
 
       <!--Pass the data to vue in a hidden input-->
@@ -18,100 +22,104 @@
 
       <ul id="users-list">
         <!--Loop Over Users-->
-
-        <li class="user-item" v-for="(user, index) in users">
-          <div class="user-details">
-            <h3>{{ user.name }}</h3>
-            <h3>
-              <a v-bind:href="'mailto:' + user.email">{{ user.email }}</a>
-            </h3>
-            <h3>
-              [Expiry Date]
-              <!-- Subscription Date + 1 Month -->
-            </h3>
-          </div>
-          <div class="user-workouts">
-            <!--Loop Over Logs-->
-
-            <div class="log-group" v-for="(log, logIndex) in user.logs">
-              <p class="log-title">{{ log.name }}</p>
-              <form @submit="removeLog($event, index, logIndex)">
-                <input
-                type="hidden"
-                name="csrfToken"
-                value="<%= locals.csrfToken %>"
-                />
-                <button class="btn-main log-btn remove-btn">
-                  -
-                </button>
-              </form>
+        <li v-for="(user, index) in users">
+          <div
+            class="user-item"
+            v-if="user.name.toLowerCase().includes(searchUsersInput.toLowerCase())"
+          >
+            <div class="user-details">
+              <h3>{{ user.name }}</h3>
+              <h3>
+                <a v-bind:href="'mailto:' + user.email">{{ user.email }}</a>
+              </h3>
+              <h3>
+                [Expiry Date]
+                <!-- Subscription Date + 1 Month -->
+              </h3>
             </div>
+            <div class="user-workouts">
+              <!--Loop Over Logs-->
 
-            <!--End loop-->
+              <div class="log-group" v-for="(log, logIndex) in user.logs">
+                <p class="log-title">{{ log.name }}</p>
+                <form @submit="removeLog($event, index, logIndex)">
+                  <input
+                    type="hidden"
+                    name="csrfToken"
+                    value="<%= locals.csrfToken %>"
+                  />
+                  <button class="btn-main log-btn remove-btn">-</button>
+                </form>
+              </div>
 
-            <form @submit="addLog($event, index)" class="log-group">
-              <input
-                type="hidden"
-                name="csrfToken"
-                value="<%= locals.csrfToken %>"
-              />
-              <select
-                class="log-title"
-                name="log-select"
-                id="log-select"
-                required
-              >
-                <option value="" disabled selected>Add Workout Log</option>
-                <!--Loop Over Logs-->
-                <option v-for="log in logs" v-bind:value="log.id">
-                  {{ log.name }}
-                </option>
-              </select>
-              <button class="btn-main log-btn">+</button>
-            </form>
-          </div>
-          <div class="user-diet">
-            <div class="log-group" v-if="user.nutrition">
-              <p class="log-title">{{ user.nutrition.name }}</p>
-              <form @submit="removeNutrition($event, index)">
+              <!--End loop-->
+
+              <form @submit="addLog($event, index)" class="log-group">
                 <input
                   type="hidden"
                   name="csrfToken"
                   value="<%= locals.csrfToken %>"
                 />
-                <button class="btn-main log-btn remove-btn">
-                  -
-                </button>
+                <select
+                  class="log-title"
+                  name="log-select"
+                  id="log-select"
+                  required
+                >
+                  <option value="" disabled selected>Add Workout Log</option>
+                  <!--Loop Over Logs-->
+                  <option v-for="log in logs" v-bind:value="log.id">
+                    {{ log.name }}
+                  </option>
+                </select>
+                <button class="btn-main log-btn">+</button>
               </form>
             </div>
-            <!--Nutrition plan dropdown-->
-            <form @submit="addNutrition($event, index)" class="log-group" v-else>
-              <input
-                type="hidden"
-                name="csrfToken"
-                value="<%= locals.csrfToken %>"
-              />
-              <select
-                class="log-title"
-                name="nutrition-select"
-                id="nutrition-select"
-                required
+            <div class="user-diet">
+              <div class="log-group" v-if="user.nutrition">
+                <p class="log-title">{{ user.nutrition.name }}</p>
+                <form @submit="removeNutrition($event, index)">
+                  <input
+                    type="hidden"
+                    name="csrfToken"
+                    value="<%= locals.csrfToken %>"
+                  />
+                  <button class="btn-main log-btn remove-btn">-</button>
+                </form>
+              </div>
+              <!--Nutrition plan dropdown-->
+              <form
+                @submit="addNutrition($event, index)"
+                class="log-group"
+                v-else
               >
-                <option value="" disabled selected>Choose Diet Plan</option>
-                <!--Loop Over Logs-->
-                <option v-for="plan in nutrition" v-bind:value="plan.id">
-                  {{ plan.name }}
-                </option>
-              </select>
-              <button class="btn-main log-btn">+</button>
-            </form>
-          </div>
-          <div class="user-access">
-            <!--Giver or remove access-->
-            <div class="log-group">
-              <button type="button" class="btn-main log-btn">
-                Grant Access
-              </button>
+                <input
+                  type="hidden"
+                  name="csrfToken"
+                  value="<%= locals.csrfToken %>"
+                />
+                <select
+                  class="log-title"
+                  name="nutrition-select"
+                  id="nutrition-select"
+                  required
+                >
+                  <option value="" disabled selected>Choose Diet Plan</option>
+                  <!--Loop Over Logs-->
+                  <option v-for="plan in nutrition" v-bind:value="plan.id">
+                    {{ plan.name }}
+                  </option>
+                </select>
+                <button class="btn-main log-btn">+</button>
+              </form>
+            </div>
+            <div class="user-access">
+              <!--Giver or remove access-->
+              <div class="log-group">
+                <button type="button" class="btn-main log-btn">
+                  Grant Access
+                </button>
+              </div>
             </div>
           </div>
         </li>
