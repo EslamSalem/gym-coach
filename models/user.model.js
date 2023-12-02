@@ -111,7 +111,10 @@ class User {
   async updateNutrition() {
     const userID = new mongodb.ObjectId(this.id);
 
-    const nutritionRef = this.nutrition.id;
+    let nutritionRef = null;
+    if (this.nutrition) {
+      nutritionRef = this.nutrition.id;
+    }
 
     return db
       .getDB()

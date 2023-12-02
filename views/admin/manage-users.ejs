@@ -71,14 +71,21 @@
             </form>
           </div>
           <div class="user-diet">
-            <!--Nutrition plan dropdown-->
             <div class="log-group" v-if="user.nutrition">
               <p class="log-title">{{ user.nutrition.name }}</p>
-              <button type="button" class="btn-main log-btn remove-btn">
-                -
-              </button>
+              <form @submit="removeNutrition($event, index)">
+                <input
+                  type="hidden"
+                  name="csrfToken"
+                  value="<%= locals.csrfToken %>"
+                />
+                <button class="btn-main log-btn remove-btn">
+                  -
+                </button>
+              </form>
             </div>
-            <form class="log-group" v-else>
+            <!--Nutrition plan dropdown-->
+            <form @submit="addNutrition($event, index)" class="log-group" v-else>
               <input
                 type="hidden"
                 name="csrfToken"

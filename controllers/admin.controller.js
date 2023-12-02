@@ -37,7 +37,20 @@ async function updateUserLogs(req, res, next) {
   res.json({});
 }
 
-async function updateUserNutrition(req, res, next) {}
+async function updateUserNutrition(req, res, next) {
+  const userID = req.params.id;
+
+  let user;
+  try {
+    user = await User.getUserByID(userID);
+    user.nutrition = req.body.nutrition;
+    await user.updateNutrition();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({});
+}
 
 async function getLogs(req, res, next) {
   let logs;

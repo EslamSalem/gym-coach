@@ -67,6 +67,67 @@ const manageUsersApp = {
         alert("Something went wrong - Could not update user's workout logs.");
         return;
       }
+    },
+    async addNutrition(event, index) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+
+      const nutritionID = formData.get("nutrition-select");
+      const nutritionName =
+        form.firstElementChild.nextElementSibling.options[
+          form.firstElementChild.nextElementSibling.selectedIndex
+        ].text;
+      const csrfToken = formData.get("csrfToken");
+
+      //reset drop down menu selected option
+      form.firstElementChild.nextElementSibling.selectedIndex = 0;
+
+      const nutrition = {
+        id: nutritionID,
+        name: nutritionName,
+      };
+
+      this.users[index].nutrition = nutrition;
+      
+      await this.sendPatchNutritionRequest(index, csrfToken);
+    },
+    async removeNutrition(event, index) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = new FormData(form);
+      const csrfToken = formData.get("csrfToken");
+      
+      this.users[index].nutrition = null;
+
+      await this.sendPatchNutritionRequest(index, csrfToken);
+    },
+    async sendPatchNutritionRequest(index, csrfToken) {
+      const userID = this.users[index].id;
+
+      let response;
+      try {
+        response = await fetch(`/admin/users/${userID}/updateNutrition`, {
+          method: "PATCH",
+          body: JSON.stringify({
+            nutrition: this.users[index].nutrition,
+            csrfToken: csrfToken,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+      } catch (error) {
+        alert("Something went wrong - Could not update user's diet plan.");
+        return;
+      }
+
+      if (!response.ok) {
+        alert("Something went wrong - Could not update user's diet plan.");
+        return;
+      }
     }
   },
   mounted() {
