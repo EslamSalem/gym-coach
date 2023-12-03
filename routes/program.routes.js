@@ -1,9 +1,9 @@
 const express = require("express");
 
+const programController = require("../controllers/program.controller");
+
 const router = express.Router();
 
-router.get("/", function(req, res) {  // /program
-  res.render("client/program");
-});
+router.get("/:id", programController.getProgram); // /program/userID
 
 module.exports = router;

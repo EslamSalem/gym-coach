@@ -6,6 +6,11 @@
   gap: 2rem;
 }
 
+#plans p {
+  text-align: center;
+  font-size: 1.25rem;
+}
+
 .plan-container:nth-of-type(1) {
   grid-column: 1 / span 2;
 }
@@ -19,11 +24,12 @@
 .accordion {
   box-shadow: var(--box-shadow-basic);
   border-radius: 6px;
+  font-size: 1.5rem;
 }
 
 .accordion-button {
   font-family: inherit;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -42,12 +48,13 @@
   background-color: var(--secondary-color);
   margin: 0;
   padding: 1rem;
+  font-size: 1.5rem;
 }
 
 #diet-details h3 {
   text-align: center;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 @media (max-width: 48rem) {

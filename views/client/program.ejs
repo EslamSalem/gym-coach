@@ -1,9 +1,13 @@
 <%- include("../includes/head", {title: "My Program"}) %>
 <link rel="stylesheet" href="/styles/program.css" />
+<script src="/scripts/program-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
-  <main>
+  <main id="program">
+    <!--pass the user to vue-->
+    <input type="hidden" id="user" value="<%= user %>">
+
     <section id="plans">
       <div class="plan-container">
         <h2 class="page-heading">Weekly Routine</h2>
@@ -11,22 +15,18 @@
       </div>
       <div class="plan-container">
         <h2 class="page-heading">Diet</h2>
-        <div id="diet-details">
-          <h3>Plan Title</h3>
+        <div id="diet-details"  v-if="user.nutrition">
+          <h3>{{user.nutrition.name}}</h3>
           <ul>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-              recusandae velit deserunt quasi magni dolores.
-            </li>
-            <li>cupiditate nam delectus dolore accusamus, sequi quae aliquid. Quis
-              repudiandae quod explicabo. Blanditiis tempore explicabo
-            </li>
-            <li>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-              recusandae velit deserunt quasi magni dolores.
+            <li v-for="meal in user.nutrition.meals">
+              {{meal}}
             </li>
           </ul>
         </div>
+        <p v-else>
+          Your diet plan is not set. Contact a coach via e-mail to get you
+          started.
+        </p>
       </div>
     </section>
   </main>

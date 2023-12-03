@@ -126,8 +126,10 @@ class User {
     const userDocument = await db
       .getDB()
       .collection("users")
-      .findOne({ email: email })
-      .project({ logRefs: 0, nutritionRef: 0 });
+      .findOne(
+        { email: email },
+        { projection: { logRefs: 0, nutritionRef: 0 } }
+      );
 
     if (userDocument) {
       return new User(userDocument);
