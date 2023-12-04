@@ -3,6 +3,10 @@ function protectRoutes(req, res, next) {
     return res.status(401).render("401");
   }
 
+  if (req.path.startsWith("/program") && !res.locals.hasAccess) {
+    return res.render("expired");
+  }
+
   if (req.path.startsWith("/admin") && !res.locals.isAdmin) {
     return res.status(401).render("403");
   }

@@ -1,0 +1,19 @@
+<%- include("includes/head", {title: "Payment Complete!"}) %>
+<link rel="stylesheet" href="/styles/error.css" />
+</head>
+<body>
+  <%- include("includes/header") %>
+  <main>
+    <section>
+      <h2 class="page-heading">Payment Complete</h2>
+      <div>
+        <p>
+          Payment was successfully processed - You can view your program.
+        </p>
+        <a href="/program/<%= locals.uid %>" class="btn-main">My Program</a>
+      </div>
+    </section>
+  </main>
+  <%- include("includes/footer") %>
+</body>
+</html>

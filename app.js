@@ -8,6 +8,7 @@ const createSessionConfig = require("./utility/session-config");
 const { doubleCsrfProtection } = require("./utility/csrf-config");
 const addCSRFToken = require("./middlewares/csrf-token");
 const checkAuthentication = require("./middlewares/check-authentication");
+const checkAccess = require("./middlewares/check-access");
 const protectRoutes = require("./middlewares/protect-routes");
 const notFound = require("./middlewares/not-found");
 const errorHandler = require("./middlewares/error-handler");
@@ -30,6 +31,7 @@ app.use(doubleCsrfProtection);
 
 app.use(addCSRFToken);
 app.use(checkAuthentication);
+app.use(checkAccess);
 
 app.use(baseRoutes);
 app.use(protectRoutes);

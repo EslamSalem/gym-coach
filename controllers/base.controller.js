@@ -1,3 +1,8 @@
+const Stripe = require("stripe");
+const stripe = Stripe(
+  "sk_test_51O7Z0dIGuQXC8ga6v9GzDZPGsvt5tZLnDIyjKEYn0l0QS73Bfpq7CbmPJTCBNi7ZBENRrW8jdafvK7Dz7veqQKDC00Q5nBFilP"
+);
+
 const User = require("../models/user.model");
 const credentialsValid = require("../utility/validation");
 const sessionFlash = require("../utility/session-flash");
@@ -15,11 +20,11 @@ function getSignup(req, res) {
       name: "",
       email: "",
       password: "",
-      phone: ""
+      phone: "",
     };
   }
 
-  res.render("signup", {sessionData: sessionData});
+  res.render("signup", { sessionData: sessionData });
 }
 
 async function signup(req, res, next) {
@@ -36,7 +41,7 @@ async function signup(req, res, next) {
       ...userData,
     };
 
-    sessionFlash.flashDataToSession(req, flashedData, function() {
+    sessionFlash.flashDataToSession(req, flashedData, function () {
       res.redirect("/signup");
     });
 
@@ -52,21 +57,21 @@ async function signup(req, res, next) {
         message: "E-mail is already in use!",
         ...userData,
       };
-  
-      sessionFlash.flashDataToSession(req, flashedData, function() {
+
+      sessionFlash.flashDataToSession(req, flashedData, function () {
         res.redirect("/signup");
       });
-  
+
       return;
     }
     await user.signup();
     user = await User.getUserByEmail(user.email);
   } catch (error) {
-    return next(error);    
+    return next(error);
   }
 
-  authentication.addUserAuthentication(req, user, function() {
-    res.redirect("/expired");
+  authentication.addUserAuthentication(req, user, function () {
+    res.redirect(`/program/${user.id}`);
   });
 }
 
@@ -80,7 +85,7 @@ function getLogin(req, res) {
     };
   }
 
-  res.render("login", {sessionData: sessionData});
+  res.render("login", { sessionData: sessionData });
 }
 
 async function login(req, res, next) {
@@ -93,7 +98,7 @@ async function login(req, res, next) {
   try {
     user = await User.getUserByEmail(userData.email);
   } catch (error) {
-    return next(error);    
+    return next(error);
   }
 
   if (!user) {
@@ -102,7 +107,7 @@ async function login(req, res, next) {
       ...userData,
     };
 
-    sessionFlash.flashDataToSession(req, flashedData, function() {
+    sessionFlash.flashDataToSession(req, flashedData, function () {
       res.redirect("/login");
     });
 
@@ -117,24 +122,68 @@ async function login(req, res, next) {
       ...userData,
     };
 
-    sessionFlash.flashDataToSession(req, flashedData, function() {
+    sessionFlash.flashDataToSession(req, flashedData, function () {
       res.redirect("/login");
     });
 
     return;
   }
 
-  authentication.addUserAuthentication(req, user, function() {
+  authentication.addUserAuthentication(req, user, function () {
     if (user.isAdmin) {
-    res.redirect("/admin/users");
+      res.redirect("/admin/users");
     } else {
       res.redirect(`/program/${user.id}`);
     }
   });
 }
 
-function getExpired(req, res) {
-  res.render("expired");
+async function buyMembership(req, res) {
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: [{
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: "1-Month Gym Coach Membership",
+        },
+        unit_amount: 99.99 * 100,
+      },
+      quantity: 1,
+    }],
+    mode: "payment",
+    success_url: "http://localhost:3000/membership/success",
+    cancel_url: "http://localhost:3000/membership/failure",
+  });
+
+  res.redirect(303, session.url);
+}
+
+async function getSuccess(req, res, next) {
+  let user;
+  try {
+    user = await User.getUserByID(res.locals.uid);
+
+    user.hasAccess = true;
+
+    const subscriptionDate = new Date();
+    subscriptionDate.setMonth(subscriptionDate.getMonth() + 1); //Change subscription to expiry
+
+    user.expiryDate = subscriptionDate;
+    
+    user.saveAccess();
+  } catch (error) {
+    return next(error);
+  }
+
+  req.session.hasAccess = user.hasAccess;
+  req.session.save(function() {
+    res.render("success");
+  });
+}
+
+function getFailure(req, res) {
+  res.render("failure");
 }
 
 function logout(req, res) {
@@ -148,6 +197,8 @@ module.exports = {
   signup: signup,
   getLogin: getLogin,
   login: login,
-  getExpired: getExpired,
+  buyMembership: buyMembership,
+  getSuccess: getSuccess,
+  getFailure: getFailure,
   logout: logout,
 };

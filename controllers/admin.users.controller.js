@@ -51,8 +51,30 @@ async function updateUserNutrition(req, res, next) {
   res.json({});
 }
 
+async function toggleAccess(req, res, next) {
+  const userID = req.params.id;
+
+  let user;
+  try {
+    user = await User.getUserByID(userID);
+
+    user.hasAccess = req.body.access;
+    
+    if (req.body.expiryDate) {
+      user.expiryDate = new Date(req.body.expiryDate);
+    } else user.expiryDate = null;
+    
+    user.saveAccess();
+  } catch (error) {
+    return next(error);
+  }
+
+  res.json({});
+}
+
 module.exports = {
   getUsers: getUsers,
   updateUserLogs: updateUserLogs,
   updateUserNutrition: updateUserNutrition,
+  toggleAccess: toggleAccess,
 };

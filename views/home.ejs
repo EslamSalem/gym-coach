@@ -74,7 +74,10 @@
               help you assess your current fitness level, discuss your goals,
               and develop a personalized training plan that's right for you.
             </p>
-            <a href="" class="btn-main">Get a Membership</a>
+            <form action="/membership" method="post">
+              <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
+              <button class="btn-main">Get a Membership</button>
+            </form>
           </article>
         </div>
       </section>

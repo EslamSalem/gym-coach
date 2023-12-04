@@ -33,8 +33,7 @@
                 <a v-bind:href="'mailto:' + user.email">{{ user.email }}</a>
               </h3>
               <h3>
-                [Expiry Date]
-                <!-- Subscription Date + 1 Month -->
+                {{ user.expiryDate }}
               </h3>
             </div>
             <div class="user-workouts">
@@ -115,10 +114,29 @@
             </div>
             <div class="user-access">
               <!--Giver or remove access-->
-              <div class="log-group">
-                <button type="button" class="btn-main log-btn">
-                  Grant Access
-                </button>
+              <div class="log-group" v-if="user.hasAccess">
+                <form @submit="toggleAccess($event, index)">
+                  <input
+                  type="hidden"
+                  name="csrfToken"
+                  value="<%= locals.csrfToken %>"
+                  />
+                  <button class="btn-main log-btn remove-btn">
+                    Ban Access
+                  </button>
+                </form>
+              </div>
+              <div class="log-group" v-else>
+                <form @submit="toggleAccess($event, index)">
+                  <input
+                  type="hidden"
+                  name="csrfToken"
+                  value="<%= locals.csrfToken %>" 
+                  />
+                  <button class="btn-main log-btn">
+                    Grant Access
+                  </button>
+                </form>
               </div>
             </div>
           </div>

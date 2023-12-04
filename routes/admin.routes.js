@@ -21,6 +21,10 @@ router.patch("/users/:id/updateLogs", adminUsersController.updateUserLogs);
 
 router.patch("/users/:id/updateNutrition", adminUsersController.updateUserNutrition);
 
+//  /admin/users/userID/toggleAccess
+
+router.patch("/users/:id/toggleAccess", adminUsersController.toggleAccess);
+
 /* LOGS ROUTES */
 
 //  /admin/logs

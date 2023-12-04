@@ -14,7 +14,11 @@ router.get("/login", baseController.getLogin);
 
 router.post("/login", baseController.login);
 
-router.get("/expired", baseController.getExpired);
+router.post("/membership", baseController.buyMembership);
+
+router.get("/membership/success", baseController.getSuccess);
+
+router.get("/membership/failure", baseController.getFailure);
 
 router.get("/logout", baseController.logout);
 

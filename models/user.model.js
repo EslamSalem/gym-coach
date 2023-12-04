@@ -17,6 +17,10 @@ class User {
       this.id = userData._id.toString();
     }
 
+    if (userData.expiryDate) {
+      this.expiryDate = userData.expiryDate;
+    }
+
     if (userData.hasAccess) {
       this.hasAccess = userData.hasAccess;
     }
@@ -120,6 +124,17 @@ class User {
       .getDB()
       .collection("users")
       .updateOne({ _id: userID }, { $set: { nutritionRef: nutritionRef } });
+  }
+
+  saveAccess() {
+    const userID = new mongodb.ObjectId(this.id);
+    return db
+      .getDB()
+      .collection("users")
+      .updateOne(
+        { _id: userID },
+        { $set: { hasAccess: this.hasAccess, expiryDate: this.expiryDate } }
+      );
   }
 
   static async getUserByEmail(email) {

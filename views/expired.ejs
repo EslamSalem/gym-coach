@@ -12,7 +12,10 @@
           not buy a membership before logging in, or your membership has expired.
           Please get a membership to proceed.
         </p>
-        <a href="" class="btn-main">Get a Membership</a>
+        <form action="/membership" method="post">
+          <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
+          <button class="btn-main">Get a Membership</button>
+        </form>
       </div>
       <div>
         <p>

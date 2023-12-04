@@ -1,0 +1,19 @@
+<%- include("includes/head", {title: "Payment Failed!"}) %>
+<link rel="stylesheet" href="/styles/error.css" />
+</head>
+<body>
+  <%- include("includes/header") %>
+  <main>
+    <section>
+      <h2 class="page-heading">Payment Failed</h2>
+      <div>
+        <p>
+          Could not process payment - Contact an admin to help you with this problem.
+        </p>
+        <a href="mailto:admin@email.com" class="btn-main">Contact Us</a>
+      </div>
+    </section>
+  </main>
+  <%- include("includes/footer") %>
+</body>
+</html>
