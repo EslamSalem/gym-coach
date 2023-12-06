@@ -9,6 +9,7 @@
     <a href="/admin/logs/workouts" class="btn-main">Workouts Collection</a>
     <!--Pass the logs JSON file to vue in a hidden input-->
     <input type="hidden" id="logs" value="<%= logs %>" />
+    <p v-if="logs.length === 0">You haven't added any workout logs yet.</p>
     <section id="plans-grid">
       <!--Loop Over Logs-->
       <div class="plan-container" v-for="(log, index) in logs">

@@ -9,7 +9,8 @@ function credentialsValid(userData) {
     !isEmpty(userData.password) &&
     !isEmpty(userData.phone) &&
     userData.password.trim().length >= 8 &&
-    userData.email.includes("@")
+    userData.email.includes("@") &&
+    userData.image
   );
 }
 

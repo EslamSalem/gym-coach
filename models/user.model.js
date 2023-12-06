@@ -12,6 +12,9 @@ class User {
     this.email = userData.email;
     this.password = userData.password;
     this.phone = userData.phone;
+    this.image = userData.image;
+    this.imagePath = `public/images/profile-pictures/${userData.image}`;
+    this.imageURL = `/images/profile-pictures/${userData.image}`;
 
     if (userData._id) {
       this.id = userData._id.toString();
@@ -98,6 +101,18 @@ class User {
     } else return null;
   }
 
+  updateInfo() {
+    const userID = new mongodb.ObjectId(this.id);
+
+    return db
+      .getDB()
+      .collection("users")
+      .updateOne(
+        { _id: userID },
+        { $set: { name: this.name, image: this.image } }
+      );
+  }
+
   updateLogs() {
     const userID = new mongodb.ObjectId(this.id);
 
@@ -112,7 +127,7 @@ class User {
       .updateOne({ _id: userID }, { $set: { logRefs: logRefs } });
   }
 
-  async updateNutrition() {
+  updateNutrition() {
     const userID = new mongodb.ObjectId(this.id);
 
     let nutritionRef = null;
@@ -159,6 +174,7 @@ class User {
       email: this.email,
       password: hashedPassword,
       phone: this.phone,
+      image: this.image,
     });
   }
 

@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 
 const db = require("./data/database");
+const imageUpload = require("./middlewares/image-upload");
 const createSessionConfig = require("./utility/session-config");
 const { doubleCsrfProtection } = require("./utility/csrf-config");
 const addCSRFToken = require("./middlewares/csrf-token");
@@ -24,6 +25,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+
+app.use(imageUpload);
 
 app.use(cookieParser());
 app.use(expressSession(createSessionConfig()));

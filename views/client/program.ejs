@@ -5,9 +5,17 @@
 <body>
   <%- include("../includes/header") %>
   <main id="program">
+
     <!--pass the user to vue-->
     <input type="hidden" id="user" value="<%= user %>">
 
+    <section id="user-info">
+      <div id="user-card">
+        <h2>{{user.name}}</h2>
+        <img v-bind:src="user.imageURL" alt="Profile Picture">
+        <a href="/program/<%= locals.uid %>/updateInfo" class="btn-main btn-alt">Edit</a>
+      </div>
+    </section>
     <section id="plans">
       <div class="plan-container">
         <h2 class="page-heading">Weekly Routine</h2>

@@ -8,6 +8,7 @@
     <h2 class="page-heading">Manage Nutrition Plans</h2>
     <!--Pass the nutrition JSON file to vue in a hidden input-->
     <input type="hidden" id="nutrition" value="<%= nutrition %>" />
+    <p v-if="nutrition.length === 0">You haven't added any nutrition plans yet.</p>
     <section id="plans-grid">
       <!--Loop Over Nutrition Plans-->
       <div class="plan-container" v-for="(plan, index) in nutrition">

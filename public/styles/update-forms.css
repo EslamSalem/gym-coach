@@ -28,6 +28,7 @@ ul {
 
 .workout-details select {
   width: auto;
+  cursor: pointer;
 }
 
 .remove-btn {

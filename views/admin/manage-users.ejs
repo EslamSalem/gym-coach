@@ -20,6 +20,8 @@
       <input type="hidden" id="logs" value="<%= logs %>" />
       <input type="hidden" id="nutrition" value="<%= nutrition %>" />
 
+      <p v-if="users.length === 0">There are no users on the system.</p>
+
       <ul id="users-list">
         <!--Loop Over Users-->
         <li v-for="(user, index) in users">
@@ -29,16 +31,18 @@
           >
             <div class="user-details">
               <h3>{{ user.name }}</h3>
-              <h3>
+              <img v-bind:src="user.imageURL" alt="Profile Picture" />
+            </div>
+            <div class="user-contacts">
+              <p>
                 <a v-bind:href="'mailto:' + user.email">{{ user.email }}</a>
-              </h3>
-              <h3>
-                {{ user.expiryDate }}
-              </h3>
+              </p>
+              <p>{{ user.phone }}</p>
+              <p>{{ user.expiryDate }}</p>
             </div>
             <div class="user-workouts">
+              <h3>Weekly Routine</h3>
               <!--Loop Over Logs-->
-
               <div class="log-group" v-for="(log, logIndex) in user.logs">
                 <p class="log-title">{{ log.name }}</p>
                 <form @submit="removeLog($event, index, logIndex)">
@@ -75,6 +79,7 @@
               </form>
             </div>
             <div class="user-diet">
+              <h3>Diet Plan</h3>
               <div class="log-group" v-if="user.nutrition">
                 <p class="log-title">{{ user.nutrition.name }}</p>
                 <form @submit="removeNutrition($event, index)">
@@ -117,9 +122,9 @@
               <div class="log-group" v-if="user.hasAccess">
                 <form @submit="toggleAccess($event, index)">
                   <input
-                  type="hidden"
-                  name="csrfToken"
-                  value="<%= locals.csrfToken %>"
+                    type="hidden"
+                    name="csrfToken"
+                    value="<%= locals.csrfToken %>"
                   />
                   <button class="btn-main log-btn remove-btn">
                     Ban Access
@@ -129,13 +134,11 @@
               <div class="log-group" v-else>
                 <form @submit="toggleAccess($event, index)">
                   <input
-                  type="hidden"
-                  name="csrfToken"
-                  value="<%= locals.csrfToken %>" 
+                    type="hidden"
+                    name="csrfToken"
+                    value="<%= locals.csrfToken %>"
                   />
-                  <button class="btn-main log-btn">
-                    Grant Access
-                  </button>
+                  <button class="btn-main log-btn">Grant Access</button>
                 </form>
               </div>
             </div>

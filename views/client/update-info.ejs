@@ -1,0 +1,36 @@
+<%- include("../includes/head", {title: "Update Info"}) %>
+<link rel="stylesheet" href="/styles/forms.css" />
+<script src="/scripts/image-preview.js" defer></script>
+</head>
+<body>
+  <%- include("../includes/header") %>
+  <main>
+    <h2 class="page-heading">Update Info</h2>
+    <% if (errorMessage) { %>
+    <p id="error-msg"><%= errorMessage %></p>
+    <% } %>
+    <form action="/program/<%= user.id %>/updateInfo" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value="<%= user.name %>"
+        required
+      />
+      <div id="image-upload-control">
+        <div>
+          <label>Profile Picture</label>
+          <input type="file" name="image" />
+        </div>
+        <img id="user-image" src="<%= user.imageURL %>" alt="Selected Picture">
+      </div>
+      <div id="form-control-btns">
+        <button class="btn-main">Save</button>
+      </div>
+    </form>
+  </main>
+  <%- include("../includes/footer") %>
+</body>
+</html>

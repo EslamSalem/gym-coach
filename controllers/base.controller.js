@@ -35,6 +35,10 @@ async function signup(req, res, next) {
     phone: req.body.phone,
   };
 
+  if (req.file) {
+    userData.image = req.file.filename;
+  }
+
   if (!credentialsValid(userData)) {
     const flashedData = {
       message: "Invalid input!",
