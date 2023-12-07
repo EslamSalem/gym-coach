@@ -74,10 +74,15 @@
               help you assess your current fitness level, discuss your goals,
               and develop a personalized training plan that's right for you.
             </p>
-            <form action="/membership" method="post">
-              <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
-              <button class="btn-main">Get a Membership</button>
-            </form>
+            <% if (locals.isAuthenticated) { %>
+              <form action="/membership" method="post">
+                <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
+                <button class="btn-main">Get a Membership</button>
+              </form>
+            <% } else { %>
+              <a href="/signup" class="btn-main">Signup</a>
+              <a href="/login" class="btn-main btn-alt">Login</a>
+            <% } %>
           </article>
         </div>
       </section>
