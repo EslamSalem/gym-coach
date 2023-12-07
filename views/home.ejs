@@ -74,14 +74,23 @@
               help you assess your current fitness level, discuss your goals,
               and develop a personalized training plan that's right for you.
             </p>
-            <% if (locals.isAuthenticated) { %>
+            <% if (!locals.isAuthenticated) { %>
+              <a href="/signup" class="btn-main">Signup</a>
+              <a href="/login" class="btn-main btn-alt">Login</a>
+            <% } %>
+            <% if (locals.isAuthenticated && !locals.hasAccess) { %>
               <form action="/membership" method="post">
                 <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>">
                 <button class="btn-main">Get a Membership</button>
               </form>
-            <% } else { %>
-              <a href="/signup" class="btn-main">Signup</a>
-              <a href="/login" class="btn-main btn-alt">Login</a>
+            <% } %>
+            <% if (locals.hasAccess && !locals.isAdmin) { %>
+              <a href="/program/<%= locals.uid %>" class="btn-main">My Program</a>
+            <% } %>
+            <% if (locals.isAdmin) { %>
+              <a href="/admin/users" class="btn-main">Manage Users</a>
+              <a href="/admin/logs" class="btn-main">Manage Workout Logs</a>
+              <a href="/admin/nutrition" class="btn-main">Manage Nutrition Plans</a>
             <% } %>
           </article>
         </div>
