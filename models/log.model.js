@@ -47,7 +47,7 @@ class Log {
       .findOne({ _id: logID });
 
     let mappedExercises = [];
-    if (logDocument.exercises) {
+    if (logDocument && logDocument.exercises) {
       mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
         const workout = await Workout.getWorkoutByID(exercise.workoutID);
   

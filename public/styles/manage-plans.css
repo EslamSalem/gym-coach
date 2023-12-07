@@ -1,7 +1,7 @@
 main a {
   display: block;
   width: fit-content;
-  margin: auto;
+  margin: 0 auto 2rem auto;
 }
 
 main p {

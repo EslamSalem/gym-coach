@@ -20,6 +20,6 @@ router.get("/membership/success", baseController.getSuccess);
 
 router.get("/membership/failure", baseController.getFailure);
 
-router.get("/logout", baseController.logout);
+router.post("/logout", baseController.logout);
 
 module.exports = router;

@@ -11,9 +11,9 @@
     <input type="hidden" id="workouts" value="<%= workouts %>" />
     <section id="plans-grid">
       <!--Loop Over Logs-->
-      <div class="plan-container" v-for="workout in workouts">
+      <div class="plan-container" v-for="(workout, index) in workouts">
         <h3>{{ workout.name }}</h3>
-        <form @submit="updateWorkout" class="edit-workout-name invisible">
+        <form @submit="updateWorkout($event, index)" class="edit-workout-name invisible">
           <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>" />
           <input type="hidden"  name="workout-id" v-bind:value="workout.id">
           <input type="text" name="workout-name" placeholder="Name..." required />
@@ -30,7 +30,7 @@
         </form>
         <div class="form-control-btns">
           <button @click="showEditForm" class="btn-main btn-alt">Edit</button>
-          <form @submit="deleteWorkout">
+          <form @submit="deleteWorkout($event, index)">
             <input type="hidden" name="csrfToken" value="<%= locals.csrfToken %>" />
             <input type="hidden"  name="workout-id" v-bind:value="workout.id">
             <button class="btn-main remove-btn">Delete</button>

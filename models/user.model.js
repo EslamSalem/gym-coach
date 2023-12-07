@@ -34,7 +34,11 @@ class User {
 
     this.logs = [];
     if (userData.logRefs) {
-      this.logs = userData.logRefs;
+      for (const ref of userData.logRefs) {
+        if (ref) {
+          this.logs.push(ref);
+        }
+      }
     }
 
     if (userData.nutritionRef) {
@@ -80,7 +84,7 @@ class User {
       .collection("users")
       .findOne({ _id: userID });
 
-    if (userDocument.logRefs) {
+    if (userDocument && userDocument.logRefs) {
       userDocument.logRefs = await Promise.all(
         userDocument.logRefs.map(async function (logRef) {
           const log = await Log.getLogByID(logRef);
@@ -89,7 +93,7 @@ class User {
       );
     }
 
-    if (userDocument.nutritionRef) {
+    if (userDocument && userDocument.nutritionRef) {
       const nutrition = await Nutrition.getNutritionByID(
         userDocument.nutritionRef
       );

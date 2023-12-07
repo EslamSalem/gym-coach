@@ -9,7 +9,6 @@ const programApp = {
   },
   mounted() {
     this.user = JSON.parse(document.getElementById("user").value);
-    console.log(this.user);
   }
 };
 

@@ -46,7 +46,7 @@ const workoutsCollectionApp = {
       this.workouts.push(workout);
       form.firstElementChild.nextElementSibling.value = "";
     },
-    async updateWorkout(event) {
+    async updateWorkout(event, index) {
       event.preventDefault();
 
       const form = event.target;
@@ -80,15 +80,14 @@ const workoutsCollectionApp = {
 
       const responseData = await response.json();
 
-      const workoutTitle = form.previousElementSibling;
-      workoutTitle.textContent = responseData.updatedWorkout.name;
+      this.workouts[index].name = responseData.updatedWorkout.name;
 
       const workoutInput = form.lastElementChild.previousElementSibling;
       workoutInput.value = "";
 
       form.classList.add("invisible");
     },
-    async deleteWorkout(event) {
+    async deleteWorkout(event, index) {
       event.preventDefault();
 
       const form = event.target;
@@ -118,8 +117,7 @@ const workoutsCollectionApp = {
         return;
       }
 
-      const workoutCard = form.parentElement.parentElement;
-      workoutCard.style.display = "none";
+      this.workouts.splice(index, 1);
     },
     showEditForm(event) {
       const pressedButton = event.target;

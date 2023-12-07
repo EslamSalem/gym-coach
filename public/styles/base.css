@@ -81,15 +81,27 @@ a {
   font-size: 2rem;
 }
 
-header nav a {
-  margin: 1rem;
+header nav a,
+header nav button {
+  margin: 0 1rem;
   font-size: 1.5rem;
   color: var(--secondary-color);
 }
 
 header nav a:hover,
-header nav a:active {
+header nav a:active,
+header nav button:hover,
+header nav button:active {
   color: var(--gray-light);
+}
+
+header nav form {
+  display: inline;
+}
+
+header nav button {
+  background-color: transparent;
+  border: none;
 }
 
 .navbar-toggler {
@@ -121,7 +133,8 @@ header nav a:active {
   flex-direction: column;
 }
 
-.offcanvas nav a {
+.offcanvas nav a,
+.offcanvas nav button {
   color: var(--secondary-color);
   background-color: var(--primary-color-medium);
   border-radius: 4px;
@@ -129,9 +142,15 @@ header nav a:active {
   padding: 1rem;
 }
 
-.offcanvas nav a:active {
+.offcanvas nav a:active,
+.offcanvas nav button:active {
   color: var(--secondary-color);
   background-color: var(--primary-color-light);
+}
+
+.offcanvas nav button {
+  width: 100%;
+  text-align: left;
 }
 
 .btn-main {
@@ -200,7 +219,7 @@ footer img {
   display: none;
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 59rem) {
   header {
     padding: 1rem;
   }
