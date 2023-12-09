@@ -1,7 +1,7 @@
 # Gym Coach ![favicon-32x32](https://github.com/EslamSalem/gym-coach/assets/55714424/e5e4f4a3-cb48-49b2-953a-b70f08f9a696)
 
 A website for a gym to manage their clients or enroll new ones. It has all the information needed about the workouts and the nutrition plan.
-The Frontend was made by HTML - EJS Templates, CSS, and JavaScript - VueJS. The Backend was made by NodeJS - ExpressJS.
+The Frontend was made by HTML - EJS Templates, CSS, and JavaScript - VueJS. The Backend was made by NodeJS - ExpressJS. And the data is stored in a MongoDB database.
 <div align="center">
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" alt="HTML" title="HTML"/></code>
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" alt="CSS" title="CSS"/></code>
@@ -10,6 +10,7 @@ The Frontend was made by HTML - EJS Templates, CSS, and JavaScript - VueJS. The 
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/117448124-a2da9800-af3e-11eb-85d2-bd1b69b65603.png" alt="Vue.js" title="Vue.js"/></code>
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183568594-85e280a7-0d7e-4d1a-9028-c8c2209e073c.png" alt="Node.js" title="Node.js"/></code>
 	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183859966-a3462d8d-1bc7-4880-b353-e2cbed900ed6.png" alt="Express" title="Express"/></code>
+	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png" alt="mongoDB" title="mongoDB"/></code>
 </div>
 
 # Overview
@@ -148,10 +149,28 @@ The admin can edit his name and profile picture after an update. They will be di
 <br></br>
 <br></br>
 
-
 ### Responsive Design
 
 This website is completely responsive to the size of the screen and optimized for a mobile or tablet view.
 <br></br>
 
 ![Screenshot 2023-12-09 181423](https://github.com/EslamSalem/gym-coach/assets/55714424/3150cab9-7bfe-4fc8-b2d9-1c199d24440c) ![Screenshot 2023-12-09 181617](https://github.com/EslamSalem/gym-coach/assets/55714424/8c58207d-c427-4fdb-842d-31ee8e3a150d) ![Screenshot 2023-12-09 181644](https://github.com/EslamSalem/gym-coach/assets/55714424/4718613d-625f-4088-807e-652261650925) ![Screenshot 2023-12-09 182008](https://github.com/EslamSalem/gym-coach/assets/55714424/17ff11c7-e745-45a6-802d-03a58ac5fff0) ![Screenshot 2023-12-09 182037](https://github.com/EslamSalem/gym-coach/assets/55714424/60c54b60-2858-4a82-a423-4a284483c646) ![Screenshot 2023-12-09 182151](https://github.com/EslamSalem/gym-coach/assets/55714424/b38babde-8924-4335-8361-3b3b510b436c) ![Screenshot 2023-12-09 181805](https://github.com/EslamSalem/gym-coach/assets/55714424/51184dba-2398-4755-a36d-ff5ae1d362ef) ![Screenshot 2023-12-09 182236](https://github.com/EslamSalem/gym-coach/assets/55714424/b9999762-188a-4f86-962f-62b6efcf8fa7) ![Screenshot 2023-12-09 183953](https://github.com/EslamSalem/gym-coach/assets/55714424/8264d3b2-d143-4a02-b4af-b988b5e3bafc) ![Screenshot 2023-12-09 183521](https://github.com/EslamSalem/gym-coach/assets/55714424/80822fc3-d9b3-4d80-8d80-6c5da8cbb18e) ![Screenshot 2023-12-09 182344](https://github.com/EslamSalem/gym-coach/assets/55714424/1291efc3-0b84-48de-b50c-3fa15c14399b) ![Screenshot 2023-12-09 183542](https://github.com/EslamSalem/gym-coach/assets/55714424/27d288d8-af37-4c61-a039-da9e2a0a06e6)
+
+
+# Database Design
+The database consists of three main entities/collections. The User, the workout log for the weekly routine, the workout, and the nutrition plan.
+<br></br>
+
+The user collection includes the user's personal info, an expiry date for the membership, two booleans to check the user's access and whether or not he is an admin,
+an array of references to the workout logs collection, and a reference to a nutrition plan.
+<br></br>
+
+The workout log collection includes the log's name and an array of workout references.
+<br></br>
+
+The workout collection includes the workout's name.
+<br></br>
+
+The nutrition collection includes the plan's name and the meals.
+
+![Blank diagram](https://github.com/EslamSalem/gym-coach/assets/55714424/c0e0e77a-8c46-4916-9af2-7682774efc1e)
