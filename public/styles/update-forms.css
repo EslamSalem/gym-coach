@@ -22,12 +22,12 @@ ul {
 }
 
 .workout-details input {
-  width: 4rem;
+  flex: 0.2;
   margin: 0;
 }
 
 .workout-details select {
-  width: auto;
+  flex: 0.6;
   cursor: pointer;
 }
 
