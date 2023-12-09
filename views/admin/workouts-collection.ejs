@@ -1,10 +1,12 @@
 <%- include("../includes/head", {title: "Workouts Collection"}) %>
+<link rel="stylesheet" href="/styles/user-card.css">
 <link rel="stylesheet" href="/styles/manage-plans.css" />
 <script src="/scripts/workouts-collection-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
   <main id="workouts-collection">
+    <%- include("includes/admin-card") %>
     <h2 class="page-heading">Workouts Collection</h2>
     <p v-if="workouts.length === 0">You haven't added any workouts yet.</p>
     <!--Pass the workouts JSON file to vue in a hidden input-->

@@ -14,6 +14,10 @@ router.get("/login", baseController.getLogin);
 
 router.post("/login", baseController.login);
 
+router.get("/:id/updateInfo", baseController.getUpdateInfo);
+
+router.post("/:id/updateInfo", baseController.updateInfo);
+
 router.post("/membership", baseController.buyMembership);
 
 router.get("/membership/success", baseController.getSuccess);

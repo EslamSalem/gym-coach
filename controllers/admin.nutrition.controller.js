@@ -1,14 +1,19 @@
 const Nutrition = require("../models/nutrition.model");
+const User = require("../models/user.model");
 
 async function getNutrition(req, res, next) {
   let nutrition;
+  let admin;
+
   try {
     nutrition = await Nutrition.getAllNutrition();
+    admin = await User.getUserByID(res.locals.uid);
   } catch (error) {
     return next(error);
   }
   res.render("admin/manage-nutrition", {
     nutrition: JSON.stringify(nutrition),
+    admin: admin,
   });
 }
 

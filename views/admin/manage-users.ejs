@@ -1,4 +1,5 @@
 <%- include("../includes/head", {title: "Manage Users"}) %>
+<link rel="stylesheet" href="/styles/user-card.css">
 <link rel="stylesheet" href="/styles/manage-users.css" />
 <script src="/scripts/manage-users-app.js" defer></script>
 </head>
@@ -6,6 +7,7 @@
   <%- include("../includes/header") %>
   <main id="manage-users">
     <section>
+      <%- include("includes/admin-card") %>
       <h2 class="page-heading">Manage Users</h2>
       <div id="search-bar">
         <input

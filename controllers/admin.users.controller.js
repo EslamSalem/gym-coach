@@ -6,11 +6,13 @@ async function getUsers(req, res, next) {
   let users;
   let logs;
   let nutrition;
+  let admin;
 
   try {
     users = await User.getAllUsers();
     logs = await Log.getAllLogs();
     nutrition = await Nutrition.getAllNutrition();
+    admin = await User.getUserByID(res.locals.uid);
   } catch (error) {
     return next(error);
   }
@@ -18,6 +20,7 @@ async function getUsers(req, res, next) {
     users: JSON.stringify(users),
     logs: JSON.stringify(logs),
     nutrition: JSON.stringify(nutrition),
+    admin: admin,
   });
 }
 

@@ -1,10 +1,12 @@
 <%- include("../includes/head", {title: "Manage Workout Logs"}) %>
+<link rel="stylesheet" href="/styles/user-card.css">
 <link rel="stylesheet" href="/styles/manage-plans.css">
 <script src="/scripts/manage-logs-app.js" defer></script>
 </head>
 <body>
   <%- include("../includes/header") %>
   <main id="manage-logs">
+    <%- include("includes/admin-card") %>
     <h2 class="page-heading">Manage Workout Logs</h2>
     <a href="/admin/logs/workouts" class="btn-main">Workouts Collection</a>
     <!--Pass the logs JSON file to vue in a hidden input-->

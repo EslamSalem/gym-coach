@@ -219,7 +219,7 @@ footer img {
   display: none;
 }
 
-@media (max-width: 59rem) {
+@media (max-width: 62rem) {
   header {
     padding: 1rem;
   }

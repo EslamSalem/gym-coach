@@ -1,15 +1,20 @@
 const Workout = require("../models/workout.model");
 const Log = require("../models/log.model");
+const User = require("../models/user.model");
 
 async function getLogs(req, res, next) {
   let logs;
+  let admin;
+
   try {
     logs = await Log.getAllLogs();
+    admin = await User.getUserByID(res.locals.uid);
   } catch (error) {
     return next(error);
   }
   res.render("admin/manage-logs", {
     logs: JSON.stringify(logs),
+    admin: admin,
   });
 }
 

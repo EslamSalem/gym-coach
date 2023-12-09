@@ -1,14 +1,19 @@
 const Workout = require("../models/workout.model");
+const User = require("../models/user.model");
 
 async function getWorkouts(req, res, next) {
   let workouts;
+  let admin;
+
   try {
     workouts = await Workout.getAllWorkouts();
+    admin = await User.getUserByID(res.locals.uid);
   } catch (error) {
     return next(error);
   }
   res.render("admin/workouts-collection", {
     workouts: JSON.stringify(workouts),
+    admin: admin,
   });
 }
 
