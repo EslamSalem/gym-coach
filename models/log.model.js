@@ -5,9 +5,18 @@ const db = require("../data/database");
 const Workout = require("../models/workout.model");
 
 class Log {
-  constructor(name, exercises = [], _id) {
+  constructor(name, exercises, _id) {
     this.name = name;
-    this.exercises = exercises;
+
+    this.exercises = [];
+    if (exercises) {
+      for (const exercise of exercises) {
+        if (exercise) {
+          this.exercises.push(exercise);
+        }
+      }
+    }
+
     if (_id) {
       this.id = _id.toString();
     }
@@ -16,26 +25,33 @@ class Log {
   static async getAllLogs() {
     const logDocuments = await db.getDB().collection("logs").find().toArray();
 
-    return Promise.all(logDocuments.map(async function (logDocument) {
-      let mappedExercises = [];
+    return Promise.all(
+      logDocuments.map(async function (logDocument) {
+        let mappedExercises = [];
 
-      if (logDocument.exercises) {
-        mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
-          const workout = await Workout.getWorkoutByID(exercise.workoutID);
+        if (logDocument.exercises) {
+          mappedExercises = await Promise.all(
+            logDocument.exercises.map(async function (exercise) {
+              const workout = await Workout.getWorkoutByID(exercise.workoutID);
 
-          const mappedExercise = {
-            workoutID: exercise.workoutID,
-            name: workout.name,
-            sets: exercise.sets,
-            reps: exercise.reps,
-          };
-          
-          return mappedExercise;
-        }));
-      }
+              let mappedExercise = null;
+              if (workout) {
+                mappedExercise = {
+                  workoutID: exercise.workoutID,
+                  name: workout.name,
+                  sets: exercise.sets,
+                  reps: exercise.reps,
+                };
+              }
 
-      return new Log(logDocument.name, mappedExercises, logDocument._id);
-    }));
+              return mappedExercise;
+            })
+          );
+        }
+
+        return new Log(logDocument.name, mappedExercises, logDocument._id);
+      })
+    );
   }
 
   static async getLogByID(id) {
@@ -48,18 +64,23 @@ class Log {
 
     let mappedExercises = [];
     if (logDocument && logDocument.exercises) {
-      mappedExercises = await Promise.all(logDocument.exercises.map(async function(exercise) {
-        const workout = await Workout.getWorkoutByID(exercise.workoutID);
-  
-        const mappedExercise = {
-          workoutID: exercise.workoutID,
-          name: workout.name,
-          sets: exercise.sets,
-          reps: exercise.reps,
-        };
+      mappedExercises = await Promise.all(
+        logDocument.exercises.map(async function (exercise) {
+          const workout = await Workout.getWorkoutByID(exercise.workoutID);
 
-        return mappedExercise;
-      }));
+          let mappedExercise = null;
+          if (workout) {
+            mappedExercise = {
+              workoutID: exercise.workoutID,
+              name: workout.name,
+              sets: exercise.sets,
+              reps: exercise.reps,
+            };
+          }
+
+          return mappedExercise;
+        })
+      );
     }
 
     if (logDocument) {
